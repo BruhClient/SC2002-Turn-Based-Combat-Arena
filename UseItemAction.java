@@ -1,4 +1,4 @@
-public class UseItemAction implements Action {
+public class UseItemAction implements Action{
   private Item item;
   public UseItemAction(Item item){
     this.item=item;
