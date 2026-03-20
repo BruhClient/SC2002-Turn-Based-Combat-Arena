@@ -29,6 +29,30 @@ public abstract class AbstractCombatant implements Combatant {
         return hp > 0;
     }
 
+    public void applyStatusEffectsStart() {
+        for (StatusEffect effect : statusEffects) {
+            effect.onTurnStart(this);
+        }
+    }
+
+    public void applyStatusEffectsEnd() {
+        Iterator<StatusEffect> it = statusEffects.iterator();
+
+        while (it.hasNext()) {
+            StatusEffect effect = it.next();
+            effect.onTurnEnd(this);
+
+            if (effect.isExpired()) {
+                it.remove();
+            }
+        }
+    }
+
+    public void addStatusEffect(StatusEffect effect) {
+        effect.onApply(this);
+        statusEffects.add(effect);
+    }
+
     public int getHp()      { return hp; }
     public int getMaxHp()   { return maxHp; }
     public int getAttack()  { return attack; }
