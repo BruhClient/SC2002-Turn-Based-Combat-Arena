@@ -1,14 +1,14 @@
-public abstract class AbstractStatusEffect implements StatusEffect {
+public abstract class AbstractStatusEffect implements StatusEffect{
   protected int remainingTurns;
-  public AbstractStatusEffect(int duration) {
-    this.remainingTurns = duration;
+  public AbstractStatusEffect(int duration){
+    this.remainingTurns=duration;
   }
-  public void onApply(Combatant target) {}
-  public void onTurnStart(Combatant target) {}
-  public void onTurnEnd(Combatant target) {
+  public void onApply(Combatant target){}
+  public void onTurnStart(Combatant target){}
+  public void onTurnEnd(Combatant target){
     remainingTurns--;
   }
-  public boolean isExpired() {
+  public boolean isExpired(){
     return remainingTurns<=0;
   }
 }
