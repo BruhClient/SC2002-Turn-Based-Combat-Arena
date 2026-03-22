@@ -6,11 +6,8 @@ import Items.Item;
 
 import java.util.ArrayList;
 
-public class TestEnemy extends Combatant {
+public class TestEnemy extends Enemy {
     public TestEnemy() {
         super("Test Enemy", 50, 20, 10, 30);
-    }
-    public Action decideNextAction(){
-        return new BasicAttackAction();
     }
 }
