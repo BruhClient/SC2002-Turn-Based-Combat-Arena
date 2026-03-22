@@ -1,3 +1,6 @@
+package StatusEffects;
+import Combatants.Combatant;
+
 public interface StatusEffect{
   void onApply(Combatant target);
   void onTurnStart(Combatant target);

@@ -1,4 +1,6 @@
-public class DefendEffect extends AbstractStatusEffect{
+package StatusEffects;
+
+public class DefendEffect extends AbstractStatusEffect {
   private static final int DEFENSE_BONUS=10;
   public DefendEffect(int duration){
     super(duration);

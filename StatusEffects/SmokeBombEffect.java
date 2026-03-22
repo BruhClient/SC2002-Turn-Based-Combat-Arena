@@ -1,4 +1,6 @@
-public class SmokeBombEffect extends AbstractStatusEffect{
+package StatusEffects;
+
+public class SmokeBombEffect extends AbstractStatusEffect {
   public SmokeBombEffect(int duration){
     super(duration);
   }

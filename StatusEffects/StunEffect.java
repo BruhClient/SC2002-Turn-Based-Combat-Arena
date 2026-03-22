@@ -1,4 +1,7 @@
-public class StunEffect extends AbstractStatusEffect{
+package StatusEffects;
+import Combatants.Combatant;
+
+public class StunEffect extends AbstractStatusEffect {
   public StunEffect(int duration){
     super(duration);
   }

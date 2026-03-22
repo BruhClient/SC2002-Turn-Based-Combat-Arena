@@ -1,3 +1,8 @@
+package Combatants;
+import StatusEffects.StatusEffect;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public abstract class AbstractCombatant implements Combatant {
     private String name;
     private int hp;
@@ -5,6 +10,7 @@ public abstract class AbstractCombatant implements Combatant {
     private int attack;
     private int defense;
     private int speed;
+    private ArrayList<StatusEffect> statusEffects = new ArrayList<>();
 
     public AbstractCombatant(String name, int maxHp, int attack, int defense, int speed) {
         this.name = name;

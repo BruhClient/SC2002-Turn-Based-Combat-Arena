@@ -1,4 +1,6 @@
-public abstract class AbstractStatusEffect implements StatusEffect{
+package StatusEffects;
+
+public abstract class AbstractStatusEffect implements StatusEffect {
   protected int remainingTurns;
   public AbstractStatusEffect(int duration){
     this.remainingTurns=duration;

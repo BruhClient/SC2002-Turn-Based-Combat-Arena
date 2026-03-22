@@ -1,3 +1,5 @@
+package Combatants;
+
 public class BattleContext{
   private List<Combatant> allCombatants;
   public BattleContext(List<Combatant> combatants){
@@ -13,7 +15,7 @@ public class BattleContext{
       .filter(c->c.isEnemy()==actor.isEnemy() && c.isAlive())
       .toList();
   }
-  public void addStatusEffect(Combatant target, StatusEffect effect{
+  public void addStatusEffect(Combatant target, StatusEffect effect){
     target.addStatusEffect(effect);
   }
   public void removeCombatant(Combatant combatant){
