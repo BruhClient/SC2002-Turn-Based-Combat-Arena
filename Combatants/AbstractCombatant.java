@@ -3,6 +3,8 @@ import StatusEffects.StatusEffect;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static java.lang.Math.clamp;
+
 public abstract class AbstractCombatant implements Combatant {
     private String name;
     private int hp;
@@ -65,6 +67,6 @@ public abstract class AbstractCombatant implements Combatant {
     public int getDefense() { return defense; }
     public int getSpeed()   { return speed; }
 
-    protected void setHp(int hp) { this.hp = hp; }
-    protected void setDefense(int defense) { this.defense = defense; }
+    public void setHp(int hp) { this.hp = clamp(hp, 0, maxHp); }
+    public void setDefense(int defense) { this.defense = defense; }
 }
