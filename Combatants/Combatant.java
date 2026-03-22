@@ -1,5 +1,6 @@
 package Combatants;
 import Actions.Action;
+import Actions.ActionTarget;
 import BattleLogic.BattleContext;
 import StatusEffects.StatusEffect;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public abstract class Combatant {
         this.speed = speed;
     }
 
-    abstract Action decideNextAction();
+    public abstract ActionTarget decideNextAction();
 
     public String getName() {
         return name;
@@ -75,5 +76,12 @@ public abstract class Combatant {
 
     public void performAction(Action action, Combatant target, BattleContext battleContext){
         action.execute(this, target, battleContext);
+    };
+//    public void performAction(ActionTarget actionTarget, BattleContext battleContext){
+//        actionTarget.getAction().execute(this, actionTarget.getTarget(), battleContext);
+//    };
+    public void performAction(BattleContext battleContext){
+        ActionTarget acT = this.decideNextAction();
+        performAction(acT.getAction(), acT.getTarget(), battleContext);
     };
 }
