@@ -6,7 +6,7 @@ import Items.Item;
 
 import java.util.ArrayList;
 
-public abstract class TestPlayer extends Combatant {
+public class TestPlayer extends Combatant {
     private ArrayList<Item> items = new ArrayList<>();
 
     public TestPlayer(String name, int maxHp, int attack, int defense, int speed) {
