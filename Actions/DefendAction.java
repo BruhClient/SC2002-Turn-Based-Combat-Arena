@@ -1,7 +1,7 @@
 package Actions;
 import BattleLogic.BattleContext;
-import Combatants.Combatant;
 import StatusEffects.DefendEffect;
+import Combatants.Combatant;
 
 public class DefendAction implements Action{
   public void execute(Combatant player, Combatant target, BattleContext context){

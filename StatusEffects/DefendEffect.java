@@ -1,4 +1,5 @@
 package StatusEffects;
+import Combatants.Combatant;
 
 public class DefendEffect extends StatusEffect{
   private static final int DEFENSE_BONUS=10;

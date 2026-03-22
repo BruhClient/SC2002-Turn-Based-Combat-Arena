@@ -1,7 +1,7 @@
 package Actions;
-import Combatants.Combatant;
 import BattleLogic.BattleContext;
 import Items.Item;
+import Combatants.Combatant;
 
 public class UseItemAction implements Action {
   private final Item item;

@@ -1,8 +1,8 @@
 package Items;
 
-import Combatants.AbstractPlayer;
-import BattleLogic.BattleContext;
+import Combatants.Player;
 import Combatants.Combatant;
+import BattleLogic.BattleContext;
 
 public abstract class Item {
 	private String name;
@@ -34,7 +34,7 @@ public abstract class Item {
 	abstract void useEffect(Combatant user, Combatant useTarget, BattleContext context);
 
 	private void removeItem(Combatant user){
-		if (user instanceof AbstractPlayer player){
+		if (user instanceof Player player){
 			player.RemoveItem(this);
 		}
 	}

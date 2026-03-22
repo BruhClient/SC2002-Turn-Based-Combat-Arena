@@ -1,11 +1,8 @@
 package BattleLogic;
 
+import StatusEffects.StatusEffect;
+import java.util.List;
 import Combatants.Combatant;
-import StatusEffects.StatusEffect;
-import java.util.List;
-
-import StatusEffects.StatusEffect;
-import java.util.List;
 
 public class BattleContext{
   private List<Combatant> allCombatants;

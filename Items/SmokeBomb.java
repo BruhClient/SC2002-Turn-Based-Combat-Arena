@@ -1,10 +1,8 @@
 package Items;
 
-import Actions.SpecialSkillAction;
 import BattleLogic.BattleContext;
-import Combatants.Combatant;
 import StatusEffects.SmokeBombEffect;
-import StatusEffects.StatusEffect;
+import Combatants.Combatant;
 
 public class SmokeBomb extends Item {
 	final private String name = "Smoke Bomb";
