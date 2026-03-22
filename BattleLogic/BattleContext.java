@@ -1,4 +1,8 @@
-package Combatants;
+package BattleLogic;
+
+import Combatants.Combatant;
+import StatusEffects.StatusEffect;
+import java.util.List;
 
 public class BattleContext{
   private List<Combatant> allCombatants;

@@ -1,6 +1,6 @@
 package Actions;
 
-import Combatants.BattleContext;
+import BattleLogic.BattleContext;
 import Combatants.Combatant;
 
 public class BasicAttackAction implements Action{

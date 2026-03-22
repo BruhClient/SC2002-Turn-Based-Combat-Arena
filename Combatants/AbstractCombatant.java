@@ -1,7 +1,11 @@
 package Combatants;
+import Actions.Action;
+import BattleLogic.BattleContext;
+import BattleLogic.BattleEngine;
 import StatusEffects.StatusEffect;
 import java.util.ArrayList;
 import java.util.Iterator;
+import static java.lang.Math.clamp;
 
 public abstract class AbstractCombatant implements Combatant {
     private String name;
@@ -65,6 +69,11 @@ public abstract class AbstractCombatant implements Combatant {
     public int getDefense() { return defense; }
     public int getSpeed()   { return speed; }
 
-    protected void setHp(int hp) { this.hp = hp; }
-    protected void setDefense(int defense) { this.defense = defense; }
+    public void setHp(int newHp) { this.hp = clamp(newHp, 0, maxHp); }
+    public void addHp(int addHp) { setHp(hp + addHp); }
+    public void setDefense(int defense) { this.defense = defense; }
+
+    public void performAction(Action action, Combatant target, BattleContext battleContext){
+        action.execute(this, target, battleContext);
+    };
 }

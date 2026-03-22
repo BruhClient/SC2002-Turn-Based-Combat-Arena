@@ -1,10 +1,10 @@
 package Actions;
-import Items.Item;
 import Combatants.Combatant;
-import Combatants.BattleContext;
+import BattleLogic.BattleContext;
+import Items.Item;
 
 public class UseItemAction implements Action {
-  private Item item;
+  private final Item item;
   public UseItemAction(Item item)
   {
     this.item=item;

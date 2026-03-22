@@ -1,7 +1,6 @@
 package Combatants;
 
 import Items.Item;
-
 import java.util.ArrayList;
 
 public abstract class AbstractPlayer extends AbstractCombatant {
