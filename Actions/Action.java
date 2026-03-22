@@ -1,4 +1,5 @@
 package Actions;
+import Combatants.BattleContext;
 import Combatants.Combatant;
 
 public interface Action{

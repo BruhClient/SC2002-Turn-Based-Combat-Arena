@@ -1,4 +1,5 @@
 package StatusEffects;
+import Combatants.Combatant;
 
 public abstract class AbstractStatusEffect implements StatusEffect {
   protected int remainingTurns;
