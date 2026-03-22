@@ -24,6 +24,8 @@ public abstract class Combatant {
         this.speed = speed;
     }
 
+    abstract Action decideNextAction();
+
     public String getName() {
         return name;
     }

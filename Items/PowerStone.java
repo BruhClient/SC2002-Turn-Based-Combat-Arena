@@ -5,8 +5,9 @@ import BattleLogic.BattleContext;
 import Combatants.Combatant;
 
 public class PowerStone extends Item {
-	final private String name = "Power Stone";
-	final private boolean consumeOnUse = true;
+	public PowerStone(String name, boolean consumeOnUse, boolean alwaysTargetSelf) {
+		super("Power Stone", true, false);
+	}
 
 	public void useEffect(Combatant user, Combatant useTarget, BattleContext context)
 	{

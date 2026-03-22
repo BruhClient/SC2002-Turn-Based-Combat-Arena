@@ -1,21 +1,21 @@
 package Combatants;
 
 import Actions.Action;
-import Actions.BasicAttackAction;
 import Actions.DefendAction;
 import Items.Item;
+
 import java.util.ArrayList;
 
-public abstract class Player extends Combatant {
+public abstract class TestPlayer extends Combatant {
     private ArrayList<Item> items = new ArrayList<>();
 
-    public Player(String name, int maxHp, int attack, int defense, int speed) {
-        super(name, maxHp, attack, defense, speed);
+    public TestPlayer(String name, int maxHp, int attack, int defense, int speed) {
+        super("Test Player", 300, 30, 20, 35);
     }
     public void RemoveItem(Item item){
         items.remove(item);
     }
     public Action decideNextAction(){
-        return new DefendAction(); // TEMPORARY. TO-DO!!!
+        return new DefendAction(); // TEMPORARY.
     }
 }

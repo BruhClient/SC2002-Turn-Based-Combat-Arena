@@ -5,9 +5,9 @@ import StatusEffects.SmokeBombEffect;
 import Combatants.Combatant;
 
 public class SmokeBomb extends Item {
-	final private String name = "Smoke Bomb";
-	final private boolean consumeOnUse = true;
-
+	public SmokeBomb(String name, boolean consumeOnUse, boolean alwaysTargetSelf) {
+		super("Smoke Bomb", true, true);
+	}
 	public void useEffect(Combatant user, Combatant useTarget, BattleContext context)
 	{
 		// Give useTarget SmokeBombEffect
