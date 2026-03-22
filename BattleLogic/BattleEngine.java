@@ -25,6 +25,11 @@ public class BattleEngine {
 		return battleContext;
 	}
 
+
+	// to-do: sort enemies in speed order
+	// maybe consider checking game end on every action
+	// also just make the code less repetitive here
+	// Could maybe stream-ify all of this.
 	public static void runTurn(){
 		// Start turn effects:
 		boolean continueGame = CheckCompleteWave(); // Check if start next wave / end battle
@@ -65,8 +70,6 @@ public class BattleEngine {
 		return true;
 	}
 
-	// TO-DO: repeated code, format this better.
-	// Could maybe stream-ify all of this.
 	private static void runTurnStartStatusEffects(){
 		for (Combatant combatant : battleContext.getCombatants()) {
 			combatant.applyStatusEffectsStart();
