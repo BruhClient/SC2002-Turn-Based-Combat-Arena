@@ -11,10 +11,10 @@ public class UseItemAction implements Action {
   }
   public void execute(Combatant player, Combatant target, BattleContext context)
   {
-    item.use(player, context);
+    item.use(player, target, context);
   }
   public String getName()
   {
-    return "Use Items.Item";
+    return item.getName();
   }
 }
