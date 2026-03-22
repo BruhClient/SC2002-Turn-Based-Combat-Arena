@@ -1,10 +1,18 @@
 package StatusEffects;
 import Combatants.Combatant;
 
-public interface StatusEffect{
-  void onApply(Combatant target);
-  void onTurnStart(Combatant target);
-  void onTurnEnd(Combatant target);
-  boolean isExpired();
-  String getName();
+public abstract class StatusEffect{
+  protected int remainingTurns;
+  public StatusEffect(int duration){
+    this.remainingTurns=duration;
+  }
+  public void onApply(Combatant target){}
+  public void onTurnStart(Combatant target){}
+  public void onTurnEnd(Combatant target){
+    remainingTurns--;
+  }
+  public boolean isExpired(){
+    return remainingTurns <= 0;
+  }
+  public abstract String getName();
 }

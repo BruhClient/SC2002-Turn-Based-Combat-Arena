@@ -1,7 +1,7 @@
 package StatusEffects;
 import Combatants.Combatant;
 
-public class StunEffect extends AbstractStatusEffect {
+public class StunEffect extends StatusEffect{
   public StunEffect(int duration){
     super(duration);
   }
