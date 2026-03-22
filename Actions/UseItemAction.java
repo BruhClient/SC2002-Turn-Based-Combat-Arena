@@ -1,6 +1,7 @@
 package Actions;
 import Items.Item;
 import Combatants.Combatant;
+import Combatants.BattleContext;
 
 public class UseItemAction implements Action {
   private Item item;
@@ -10,7 +11,7 @@ public class UseItemAction implements Action {
   }
   public void execute(Combatant player, Combatant target, BattleContext context)
   {
-    item.use(player);
+    item.use(player, context);
   }
   public String getName()
   {
