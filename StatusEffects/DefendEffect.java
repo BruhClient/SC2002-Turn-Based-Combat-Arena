@@ -7,12 +7,13 @@ public class DefendEffect extends StatusEffect{
     super(duration);
   }
   public void onApply(Combatant target){
-    target.increaseDefense(DEFENSE_BONUS);
+    target.setDefense(target.getDefense()+DEFENSE_BONUS);
+      System.out.println(target.getName()+"'s defense increased!");
   }
   public void onTurnEnd(Combatant target){
     super.onTurnEnd(target);
-    if (isExpired()) {
-      target.decreaseDefense(DEFENSE_BONUS);
+    if (isExpired()){
+      target.setDefense(target.getDefense()-DEFENSE_BONUS);
       System.out.println(target.getName()+"'s defense boost expired.");
       }
   }
