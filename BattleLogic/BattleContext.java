@@ -1,6 +1,8 @@
 package BattleLogic;
 
-import Combatants.*;
+import Combatants.Combatant;
+import Combatants.Enemy;
+import Player.Player;
 import SpawnPatterns.LevelSpawns;
 import java.util.ArrayList;
 import Combatants.Combatant;
