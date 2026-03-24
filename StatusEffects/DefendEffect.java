@@ -7,7 +7,7 @@ public class DefendEffect extends StatusEffect{
     super(duration);
   }
   public void onApply(Combatant target){
-    target.addStatusEffect(new DefendEffect(2));
+    //
   }
   public void onTurnEnd(Combatant target){
     super.onTurnEnd(target);
