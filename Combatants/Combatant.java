@@ -25,8 +25,6 @@ public abstract class Combatant {
         this.speed = speed;
     }
 
-    public abstract ActionTarget decideNextAction(BattleContext battleContext);
-
     public String getName() {
         return name;
     }
@@ -76,12 +74,5 @@ public abstract class Combatant {
 
     public void performAction(Action action, Combatant target, BattleContext battleContext){
         action.execute(this, target, battleContext);
-    };
-//    public void performAction(ActionTarget actionTarget, BattleContext battleContext){
-//        actionTarget.getAction().execute(this, actionTarget.getTarget(), battleContext);
-//    };
-    public void performAction(BattleContext battleContext){
-        ActionTarget acT = this.decideNextAction(battleContext);
-        performAction(acT.getAction(), acT.getTarget(), battleContext);
     };
 }

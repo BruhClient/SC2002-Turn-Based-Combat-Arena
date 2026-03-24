@@ -13,9 +13,4 @@ public abstract class Enemy extends Combatant {
     public Enemy(String name, int maxHp, int attack, int defense, int speed) {
         super(name, maxHp, attack, defense, speed);
     }
-    public ActionTarget decideNextAction(BattleContext battleContext){
-        Action action = new BasicAttackAction();
-        Combatant target = battleContext.getPlayer();
-        return new ActionTarget(action, target);
-    }
 }

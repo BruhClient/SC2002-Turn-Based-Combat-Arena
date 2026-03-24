@@ -1,11 +1,10 @@
-package Combatants;
+package Player;
 
 import Actions.Action;
 import Actions.ActionTarget;
 import Actions.BasicAttackAction;
-import Actions.DefendAction;
 import BattleLogic.BattleContext;
-import BattleLogic.BattleEngine;
+import Combatants.Combatant;
 import Items.Item;
 
 import java.util.ArrayList;
@@ -16,6 +15,12 @@ public class TestPlayer extends Player {
     public TestPlayer() {
         super("Test Player", 300, 30, 15, 35);
     }
+
+    @Override
+    public void useSpecialSkill(BattleContext context) {
+        //
+    }
+
     public void RemoveItem(Item item){
         items.remove(item);
     }

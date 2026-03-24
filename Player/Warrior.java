@@ -1,5 +1,6 @@
 package Player;
 
+import Actions.ActionTarget;
 import BattleLogic.BattleContext;
 
 public class Warrior extends Player {
