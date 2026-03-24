@@ -10,6 +10,8 @@ class Main {
 		// Test scenario
 		Player playerCombatant = new TestPlayer();
 		LevelSpawns levelSpawns = new Spawns_LevelTest();
-		BattleEngine.startBattle(playerCombatant, levelSpawns);
+
+		BattleEngine battleEngine = new BattleEngine();
+		battleEngine.startBattle(playerCombatant, levelSpawns);
 	}
 }

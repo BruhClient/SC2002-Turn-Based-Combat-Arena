@@ -4,6 +4,7 @@ import Actions.Action;
 import Actions.ActionTarget;
 import Actions.BasicAttackAction;
 import Actions.DefendAction;
+import BattleLogic.BattleContext;
 import BattleLogic.BattleEngine;
 import Items.Item;
 
@@ -18,9 +19,9 @@ public class TestPlayer extends Player {
     public void RemoveItem(Item item){
         items.remove(item);
     }
-    public ActionTarget decideNextAction(){
+    public ActionTarget decideNextAction(BattleContext battleContext){
         Action action = new BasicAttackAction();
-        Combatant target = BattleEngine.getBattleContext().getEnemyCombatants().getFirst();
+        Combatant target = battleContext.getEnemyCombatants().getFirst();
         return new ActionTarget(action, target);
     }
 }

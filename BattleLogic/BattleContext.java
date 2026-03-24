@@ -18,15 +18,10 @@ public class BattleContext {
 		this.levelSpawns=levelSpawns;
 		this.allCombatants = initialCombatants;
 	}
-	public BattleContext(LevelSpawns levelSpawns, Combatant initialCombatant){
-		this.levelSpawns=levelSpawns;
-		this.allCombatants = new ArrayList<>();
-		this.allCombatants.add(initialCombatant);
-	}
-	public void SpawnNextWave(){
-		waveNum++;
-		allCombatants.addAll(levelSpawns.getWaveSpawn(waveNum));
-	}
+//	public void SpawnNextWave(){
+//		waveNum++;
+//		allCombatants.addAll(levelSpawns.getWaveSpawn(waveNum));
+//	}
 
 
 
@@ -58,9 +53,9 @@ public class BattleContext {
 		return filteredList;
 	}
 
-	public void removeCombatant(Combatant sacrifice){
-		allCombatants.remove(sacrifice);
-	}
+//	public void removeCombatant(Combatant sacrifice){
+//		allCombatants.remove(sacrifice);
+//	}
 
 
 
