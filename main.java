@@ -1,5 +1,5 @@
 import BattleLogic.BattleEngine;
-import Combatants.Player;
+import Player.Player;
 import Player.TestPlayer;
 import SpawnPatterns.LevelSpawns;
 import SpawnPatterns.Spawns_LevelTest;
