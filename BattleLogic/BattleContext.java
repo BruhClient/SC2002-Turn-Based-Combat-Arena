@@ -3,8 +3,9 @@ package BattleLogic;
 import Combatants.Combatant;
 import Combatants.Enemies.Enemy;
 import Combatants.Players.Player;
-import SpawnPatterns.LevelSpawns;
+import BattleLogic.SpawnPatterns.LevelSpawns;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Stores information about the current battle
@@ -12,6 +13,7 @@ import java.util.ArrayList;
  */
 public class BattleContext {
 	private int waveNum = 0;
+	private int turnNum = 0;
 	private LevelSpawns levelSpawns;
 	private ArrayList<Combatant> allCombatants;
 
@@ -19,20 +21,21 @@ public class BattleContext {
 		this.levelSpawns=levelSpawns;
 		this.allCombatants = initialCombatants;
 	}
-//	public void SpawnNextWave(){
-//		waveNum++;
-//		allCombatants.addAll(levelSpawns.getWaveSpawn(waveNum));
-//	}
 
-
-
-
+	// Getters
 	public ArrayList<Combatant> getCombatants(){
 		return allCombatants;
 	}
 
-	public Player getPlayer(){
-		return getCombatantsOfType(Player.class).getFirst(); // Assumes only 1 player, but expandable into get random player
+	public ArrayList<Player> getPlayerCombatants(){
+		// This code does not assume there only being 1 player!
+		return getCombatantsOfType(Player.class);
+	}
+
+	public Player getRandomPlayerCombatant(){
+		// Easy way to deal with multiple players for now
+		Random r = new Random();
+		return getPlayerCombatants().get(r.nextInt(getPlayerCount()));
 	}
 
 	public ArrayList<Enemy> getEnemyCombatants(){
@@ -54,25 +57,34 @@ public class BattleContext {
 		return filteredList;
 	}
 
-//	public void removeCombatant(Combatant sacrifice){
-//		allCombatants.remove(sacrifice);
-//	}
-
-
-
 	public int getEnemyCount(){
-		return getCombatantsOfType(Enemy.class).size();
+		return getEnemyCombatants().size();
+	}
+	public int getPlayerCount(){
+		return getPlayerCombatants().size();
 	}
 
 	public int getWaveNum(){
 		return waveNum;
 	}
-	public int getWaveCount(){
-		return levelSpawns.getWaveCount();
+	public int getMaxWave(){
+		return levelSpawns.getMaxWave();
+	}
+	public int getTurnNum(){
+		return turnNum;
 	}
 
 
-//	public void addStatusEffect(Combatant target, StatusEffect effect){
-//		target.addStatusEffect(effect);
-//	}
+	// The only method that actually change anything
+	public void spawnNextWave(){
+		if (waveNum < levelSpawns.getMaxWave()){
+			waveNum++;
+			System.out.println("Started wave " + waveNum);
+			allCombatants.addAll(levelSpawns.getWaveSpawn(waveNum));
+		}
+	}
+	public void incrementTurnNum(){
+		turnNum++;
+	}
+
 }

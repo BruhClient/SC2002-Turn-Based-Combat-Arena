@@ -68,7 +68,9 @@ public abstract class Combatant {
     public int getDefense() { return defense; }
     public int getSpeed()   { return speed; }
 
-    public void setHp(int newHp) { this.hp = clamp(newHp, 0, maxHp); }
+    public void setHp(int newHp) {
+        this.hp = clamp(newHp, 0, maxHp);
+    }
     public void addHp(int addHp) { setHp(hp + addHp); }
     public void setDefense(int defense) { this.defense = defense; }
 

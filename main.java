@@ -1,8 +1,8 @@
 import BattleLogic.BattleEngine;
 import Combatants.Players.Player;
 import Combatants.Players.TestPlayer;
-import SpawnPatterns.LevelSpawns;
-import SpawnPatterns.Spawns_LevelTest;
+import BattleLogic.SpawnPatterns.LevelSpawns;
+import BattleLogic.SpawnPatterns.Spawns_LevelTest;
 
 class Main {
 	public static void main(String[] args)

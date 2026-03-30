@@ -1,4 +1,4 @@
-package SpawnPatterns;
+package BattleLogic.SpawnPatterns;
 import Combatants.Combatant;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,24 +17,24 @@ public class LevelSpawns {
 	public LevelSpawns() {}
 
 	public void addSpawn(int waveNum, Combatant combatant){
-		while(getWaveCount() < waveNum){
+		while(getMaxWave() < waveNum){
 			waveList.add(new ArrayList<Combatant>());
 		}
 		waveList.get(waveNum-1).add(combatant);
 	}
 
-	public int getWaveCount(){
+	public int getMaxWave(){
 		return waveList.size();
 	}
 	public ArrayList<Combatant> getWaveSpawn(int waveNum){
-		if (waveNum > getWaveCount())
+		if (waveNum > getMaxWave())
 		{
 			return null;
 		}
 		return waveList.get(waveNum-1);
 	}
 	public List<String> getWaveSpawnNames(int waveNum){
-		if (waveNum > getWaveCount())
+		if (waveNum > getMaxWave())
 		{
 			return null;
 		}

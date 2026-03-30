@@ -1,7 +1,7 @@
 package BattleLogic;
 
 import Combatants.Combatant;
-import SpawnPatterns.LevelSpawns;
+import BattleLogic.SpawnPatterns.LevelSpawns;
 import java.util.ArrayList;
 
 public class TurnEngine {
@@ -18,5 +18,58 @@ public class TurnEngine {
 
 	public BattleContext getBattleContext() {
 		return battleContext;
+	}
+
+	/// Processes the next turn
+	public void runTurn(){
+		battleContext.incrementTurnNum();
+
+		System.out.println("-------- Wave " + battleContext.getWaveNum() + " / Turn " + battleContext.getTurnNum() + " --------");
+
+		// Produce the turn order
+		TurnOrderStrategy turnOrderStrategy = new TurnOrderStrategy(getBattleContext().getCombatants());
+
+		runStartTurnEffects(turnOrderStrategy);
+		runCombatantActions(turnOrderStrategy);
+		runEndTurnEffects(turnOrderStrategy);
+	}
+
+	private void runStartTurnEffects(TurnOrderStrategy turnOrderStrategy){
+		for (Combatant combatant : turnOrderStrategy.getCombatantOrderList()) {
+			if (combatant.isAlive()){
+				// Apply start-turn effects
+				combatant.applyStatusEffectsStart();
+			}
+		}
+	}
+	private void runCombatantActions(TurnOrderStrategy turnOrderStrategy){
+		for (Combatant combatant : turnOrderStrategy.getCombatantOrderList()) {
+			if (combatant.isAlive()){
+				// Run action
+				// combatant.performAction();
+
+				// For temporary testing purposes i will remove -10hp
+				System.out.println("test hp loss - " + combatant.getName() + " / HP = " + combatant.getHp() + " -10");
+				combatant.addHp(-10);
+			}
+		}
+	}
+	/// return true if end game
+	private void runEndTurnEffects(TurnOrderStrategy turnOrderStrategy){
+
+		for (Combatant combatant : turnOrderStrategy.getCombatantOrderList()) {
+			if (combatant.isAlive()){
+				// Apply end turn effects
+				combatant.applyStatusEffectsEnd();
+			}
+		}
+
+
+		// Remove if dead
+		battleContext.getCombatants().removeIf(combatant -> !combatant.isAlive());
+	}
+
+	public void runNewWaveEffects(){
+		battleContext.spawnNextWave();
 	}
 }

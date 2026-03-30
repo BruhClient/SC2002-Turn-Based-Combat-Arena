@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Actions/Actions.iml" filepath="$PROJECT_DIR$/Actions/Actions.iml" />
       <module fileurl="file://$PROJECT_DIR$/SC2002-Turn-Based-Combat-Arena.iml" filepath="$PROJECT_DIR$/SC2002-Turn-Based-Combat-Arena.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SpawnPatterns/SpawnPatterns.iml" filepath="$PROJECT_DIR$/SpawnPatterns/SpawnPatterns.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BattleLogic/SpawnPatterns/SpawnPatterns.iml" filepath="$PROJECT_DIR$/BattleLogic/SpawnPatterns/SpawnPatterns.iml" />
     </modules>
   </component>
 </project>
