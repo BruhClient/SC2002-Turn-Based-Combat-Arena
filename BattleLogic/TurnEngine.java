@@ -54,7 +54,6 @@ public class TurnEngine {
 			}
 		}
 	}
-	/// return true if end game
 	private void runEndTurnEffects(TurnOrderStrategy turnOrderStrategy){
 
 		for (Combatant combatant : turnOrderStrategy.getCombatantOrderList()) {
