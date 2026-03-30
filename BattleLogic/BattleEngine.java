@@ -1,7 +1,6 @@
 package BattleLogic;
 
-import Combatants.Combatant;
-import Player.Player;
+import Combatants.Players.Player;
 import SpawnPatterns.LevelSpawns;
 
 /**

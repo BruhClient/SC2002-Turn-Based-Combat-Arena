@@ -1,4 +1,4 @@
-package Enemy;
+package Combatants.Enemies;
 
 public class Goblin extends Enemy {
     public Goblin() {

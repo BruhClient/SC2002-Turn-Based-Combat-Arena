@@ -1,6 +1,6 @@
 package SpawnPatterns;
 
-import Combatants.TestEnemy;
+import Combatants.Enemies.TestEnemy;
 
 public class Spawns_LevelTest extends LevelSpawns {
 	public Spawns_LevelTest() {

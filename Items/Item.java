@@ -1,6 +1,6 @@
 package Items;
 
-import Player.Player;
+import Combatants.Players.Player;
 import Combatants.Combatant;
 import BattleLogic.BattleContext;
 

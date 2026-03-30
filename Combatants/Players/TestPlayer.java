@@ -1,4 +1,4 @@
-package Player;
+package Combatants.Players;
 
 import Actions.Action;
 import Actions.ActionTarget;
@@ -13,7 +13,7 @@ public class TestPlayer extends Player {
     private ArrayList<Item> items = new ArrayList<>();
 
     public TestPlayer() {
-        super("Test Player", 300, 30, 15, 35);
+        super("Test Combatants.Player", 300, 30, 15, 35);
     }
 
     @Override

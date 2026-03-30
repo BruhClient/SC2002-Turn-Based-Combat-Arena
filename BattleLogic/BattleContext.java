@@ -1,11 +1,10 @@
 package BattleLogic;
 
 import Combatants.Combatant;
-import Combatants.Enemy;
-import Player.Player;
+import Combatants.Enemies.Enemy;
+import Combatants.Players.Player;
 import SpawnPatterns.LevelSpawns;
 import java.util.ArrayList;
-import Combatants.Combatant;
 
 /**
  * Stores information about the current battle

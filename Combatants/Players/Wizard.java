@@ -1,4 +1,4 @@
-package Player;
+package Combatants.Players;
 
 import BattleLogic.BattleContext;
 

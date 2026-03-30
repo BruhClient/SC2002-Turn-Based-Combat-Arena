@@ -1,4 +1,4 @@
-package Enemy;
+package Combatants.Enemies;
 
 public class Wolf extends Enemy {
     public Wolf() {

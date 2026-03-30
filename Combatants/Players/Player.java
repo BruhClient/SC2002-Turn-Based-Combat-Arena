@@ -1,4 +1,4 @@
-package Player;
+package Combatants.Players;
 
 import Combatants.Combatant;
 import Items.Item;
