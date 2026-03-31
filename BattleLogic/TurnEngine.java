@@ -25,18 +25,18 @@ public class TurnEngine {
 	public void runTurn(){
 		battleContext.incrementTurnNum();
 
-		System.out.println("-------- Wave " + battleContext.getWaveNum() + " / Turn " + battleContext.getTurnNum() + " --------");
-
 		// Produce the turn order
 		TurnOrderStrategy turnOrderStrategy = new TurnOrderStrategy(getBattleContext().getCombatants());
 
+		// Display stats
+		TextboxBattleInfo textboxBattleInfo = new TextboxBattleInfo();
+		System.out.println("------------ Wave " + battleContext.getWaveNum() + " / Turn " + battleContext.getTurnNum() + " --------------------");
+		textboxBattleInfo.printBattleInfo(turnOrderStrategy.getCombatantOrderList());
+
+		// Run turn effects
 		runStartTurnEffects(turnOrderStrategy);
 		runCombatantActions(turnOrderStrategy);
 		runEndTurnEffects(turnOrderStrategy);
-
-		// Display stats!
-	    TextboxBattleInfo textboxBattleInfo = new TextboxBattleInfo();
-		textboxBattleInfo.printBattleInfo(turnOrderStrategy.getCombatantOrderList());
 	}
 
 	private void runStartTurnEffects(TurnOrderStrategy turnOrderStrategy){

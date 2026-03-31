@@ -1,4 +1,5 @@
 package BattleLogic.SpawnPatterns;
+import BattleLogic.BattleContext;
 import Combatants.Combatant;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ public class LevelSpawns {
 	public LevelSpawns(ArrayList<ArrayList<Combatant>> waveList) {
 		this.waveList = waveList;
 	}
-
 	public LevelSpawns() {}
 
 	public void addSpawn(int waveNum, Combatant combatant){
@@ -41,5 +41,11 @@ public class LevelSpawns {
 		return waveList.get(waveNum-1).stream()
 				.map(Combatant::getName)
 				.toList();
+	}
+
+	public void SpawnNextWaveActions(int waveNum, BattleContext battleContext){
+		System.out.println("Started wave " + waveNum);
+		battleContext.addCombatants(getWaveSpawn(waveNum));
+		// this can be overridden by subclasses to do really funny things on wave spawn
 	}
 }

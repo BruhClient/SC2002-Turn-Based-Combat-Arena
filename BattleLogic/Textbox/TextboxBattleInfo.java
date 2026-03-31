@@ -8,7 +8,6 @@ public class TextboxBattleInfo {
 	public TextboxBattleInfo() {}
 
 	public void printBattleInfo(ArrayList<Combatant> combatants){
-		System.out.println("----------------- Current Stats ----------------- ");
 		for (Combatant combatant : combatants){
 			printCombatantInfo(combatant);
 		}

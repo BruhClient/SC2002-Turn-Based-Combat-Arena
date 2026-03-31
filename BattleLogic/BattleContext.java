@@ -75,15 +75,20 @@ public class BattleContext {
 	}
 
 
-	// The only method that actually change anything
-	public void spawnNextWave(){
+	// The only methods that actually change anything
+	protected void spawnNextWave(){
 		if (waveNum < levelSpawns.getMaxWave()){
-			waveNum++;
-			System.out.println("Started wave " + waveNum);
-			allCombatants.addAll(levelSpawns.getWaveSpawn(waveNum));
+			incrementWaveNum();
+			levelSpawns.SpawnNextWaveActions(waveNum, this);
 		}
 	}
-	public void incrementTurnNum(){
+	public void addCombatants(ArrayList<Combatant> combatantsToAdd){
+		allCombatants.addAll(combatantsToAdd);
+	}
+	private void incrementWaveNum(){
+		waveNum++;
+	}
+	protected void incrementTurnNum(){
 		turnNum++;
 	}
 
