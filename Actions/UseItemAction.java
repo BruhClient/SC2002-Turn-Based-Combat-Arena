@@ -9,12 +9,17 @@ public class UseItemAction implements Action {
   {
     this.item=item;
   }
-  public void execute(Combatant player, Combatant target, BattleContext context)
+  public void execute(Combatant user, Combatant target, BattleContext context)
   {
-    item.use(player, target, context);
+    item.use(user, target, context);
   }
   public String getName()
   {
     return item.getName();
+  }
+
+  @Override
+  public Combatant[] getValidTargets(Combatant user, BattleContext context) {
+    return item.getValidTargets(user, context);
   }
 }

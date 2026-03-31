@@ -3,6 +3,7 @@ import BattleLogic.BattleContext;
 import Combatants.Combatant;
 
 public interface Action{
-  void execute(Combatant player, Combatant target, BattleContext context);
+  void execute(Combatant user, Combatant target, BattleContext context);
+  Combatant[] getValidTargets(Combatant user, BattleContext context);
   String getName();
 }

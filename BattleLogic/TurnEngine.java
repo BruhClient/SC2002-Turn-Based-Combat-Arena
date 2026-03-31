@@ -3,6 +3,8 @@ package BattleLogic;
 import BattleLogic.Textbox.TextboxBattleInfo;
 import Combatants.Combatant;
 import BattleLogic.SpawnPatterns.LevelSpawns;
+import Combatants.Enemies.*;
+
 import java.util.ArrayList;
 
 public class TurnEngine {
@@ -28,6 +30,10 @@ public class TurnEngine {
 		// Produce the turn order
 		TurnOrderStrategy turnOrderStrategy = new TurnOrderStrategy(getBattleContext().getCombatants());
 
+		// Update battleContext combatants to also use this order.
+		// This way any time combatants are obtained from battleContext, they'll get it in the same speed-based order.
+		battleContext.setAllCombatants(turnOrderStrategy.getCombatantOrderList());
+
 		// Display stats
 		TextboxBattleInfo textboxBattleInfo = new TextboxBattleInfo();
 		System.out.println("------------ Wave " + battleContext.getWaveNum() + " / Turn " + battleContext.getTurnNum() + " --------------------");
@@ -50,12 +56,7 @@ public class TurnEngine {
 	private void runCombatantActions(TurnOrderStrategy turnOrderStrategy){
 		for (Combatant combatant : turnOrderStrategy.getCombatantOrderList()) {
 			if (combatant.isAlive()){
-				// Run action
-				// combatant.performAction();
-
-				// For temporary testing purposes i will remove -10hp
-				System.out.println("test hp loss - " + combatant.getName() + " / HP = " + combatant.getHp() + " -10");
-				combatant.addHp(-10);
+				combatant.performAction(battleContext); // Run action
 			}
 		}
 	}
@@ -68,8 +69,10 @@ public class TurnEngine {
 			}
 		}
 
-
 		// Remove if dead
+		battleContext.getCombatants().stream()
+				.filter(c -> !c.isAlive())
+				.forEach(c -> System.out.println(c.getName() + " ran out of HP and was removed from the battlefield!"));
 		battleContext.getCombatants().removeIf(combatant -> !combatant.isAlive());
 	}
 

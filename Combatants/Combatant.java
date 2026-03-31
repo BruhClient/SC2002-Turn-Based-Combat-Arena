@@ -1,6 +1,4 @@
 package Combatants;
-import Actions.Action;
-import Actions.ActionTarget;
 import BattleLogic.BattleContext;
 import StatusEffects.StatusEffect;
 import java.util.ArrayList;

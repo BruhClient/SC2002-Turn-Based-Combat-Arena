@@ -34,6 +34,9 @@ public class BattleContext {
 
 	public Player getRandomPlayerCombatant(){
 		// Easy way to deal with multiple players for now
+		if (getPlayerCount() == 0){
+			return null;
+		}
 		Random r = new Random();
 		return getPlayerCombatants().get(r.nextInt(getPlayerCount()));
 	}
@@ -42,6 +45,7 @@ public class BattleContext {
 		return getCombatantsOfType(Enemy.class);
 	}
 
+	/// Only returns ALIVE combatants
 	public <T extends Combatant> ArrayList<T> getCombatantsOfType(Class<T> targetType) {
 		ArrayList<T> filteredList = new ArrayList<>();
 
@@ -50,7 +54,7 @@ public class BattleContext {
 		}
 
 		for (Combatant combatant : allCombatants) {
-			if (targetType.isInstance(combatant)) {
+			if (targetType.isInstance(combatant) && combatant.isAlive()) {
 				filteredList.add(targetType.cast(combatant));
 			}
 		}
@@ -92,4 +96,7 @@ public class BattleContext {
 		turnNum++;
 	}
 
+	public void setAllCombatants(ArrayList<Combatant> combatants){
+		allCombatants = combatants;
+	}
 }

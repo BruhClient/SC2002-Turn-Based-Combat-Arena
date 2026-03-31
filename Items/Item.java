@@ -22,12 +22,15 @@ public abstract class Item {
 	 * @param context Battle Context
 	 */
 	public void use(Combatant user, Combatant useTarget, BattleContext context){
+
+		if (user == useTarget){
+			System.out.println(user.getName() + " uses a " + this.getName() + "!");
+		} else {
+			System.out.println(user.getName() + " uses a " + this.getName() + " on " + useTarget.getName() + "!");
+		}
+
+		useEffect(user, useTarget, context);
 		if(consumeOnUse) removeItem(user);
-	};
-	public void use(Combatant user, BattleContext context){
-		// get useTarget from message box, unless item doesn't require
-		//TO-DO!!!!
-		//super(user, useTarget, context);
 	};
 
 	/**
@@ -44,6 +47,9 @@ public abstract class Item {
 	 * @param context Battle Context
 	 */
 	abstract void useEffect(Combatant user, Combatant useTarget, BattleContext context);
+
+	/// Returns an array of combatants that this items should be usable on.
+	public abstract Combatant[] getValidTargets(Combatant user, BattleContext context);
 
 	private void removeItem(Combatant user){
 		if (user instanceof Player player){

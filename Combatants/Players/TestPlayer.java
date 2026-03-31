@@ -1,13 +1,14 @@
 package Combatants.Players;
 
-import Actions.Action;
-import Actions.ActionTarget;
-import Actions.BasicAttackAction;
+import Actions.*;
 import BattleLogic.BattleContext;
+import BattleLogic.Textbox.TextboxPlayerInput;
 import Combatants.Combatant;
 import Items.Item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestPlayer extends Player {
     private ArrayList<Item> items = new ArrayList<>();
@@ -19,14 +20,5 @@ public class TestPlayer extends Player {
     @Override
     public void useSpecialSkill(BattleContext context) {
         //
-    }
-
-    public void RemoveItem(Item item){
-        items.remove(item);
-    }
-    public ActionTarget decideNextAction(BattleContext battleContext){
-        Action action = new BasicAttackAction();
-        Combatant target = battleContext.getEnemyCombatants().getFirst();
-        return new ActionTarget(action, target);
     }
 }

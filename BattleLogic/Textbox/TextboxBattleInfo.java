@@ -25,7 +25,7 @@ public class TextboxBattleInfo {
 		String printStr = name;
 		printStr = extendStringSpace(printStr, 20); // Makes stats look nicer
 		printStr += " ❤"+hp+"/"+maxHp;
-		printStr += " ⚡"+speed;
+		printStr += " ❯"+speed;
 		printStr += " ⚔"+attack;
 		printStr += " ⛊"+defense;
 		printStr = extendStringSpace(printStr, 43);

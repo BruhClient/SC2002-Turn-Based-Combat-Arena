@@ -14,8 +14,11 @@ public abstract class Enemy extends Combatant {
     }
 
     public void performAction(BattleContext context) { // requires context as argument
+        Combatant target = context.getRandomPlayerCombatant();
         BasicAttackAction basicAttack = new BasicAttackAction();
-        basicAttack.execute(this, target, context);   // attacker and target are always the same
+        if (target != null){
+            basicAttack.execute(this, context.getRandomPlayerCombatant(), context);
+        }
     }
 
     public boolean isStunned() {
