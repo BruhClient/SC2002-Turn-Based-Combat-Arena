@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestPlayer extends Player {
-    private ArrayList<Item> items = new ArrayList<>();
-
     public TestPlayer() {
         super("Test Player", 300, 30, 15, 35);
     }

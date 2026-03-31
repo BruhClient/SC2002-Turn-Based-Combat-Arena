@@ -15,7 +15,7 @@ public class PowerStone extends Item {
 		// Grant special action to user
 		SpecialSkillAction specialAction = new SpecialSkillAction();
 
-		Combatant target = TextboxPlayerInput.askCombatant(context.getEnemyCombatants());
+		Combatant target = TextboxPlayerInput.askCombatant(context.getEnemyCombatants(), true);
 		if (target == null){
 			System.out.println("No valid target - The Power Stone was wasted...");
 			return;

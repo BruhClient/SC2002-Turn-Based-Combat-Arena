@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class Player extends Combatant {
-    private List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private int specialCooldown = 0;
 
     public Player(String name, int maxHp, int attack, int defense, int speed) {
@@ -59,9 +59,10 @@ public abstract class Player extends Combatant {
         // Create possible action menu/submenu
         String[] action2dListName = {basicAttackActions.getFirst().getName(), defendActions.getFirst().getName(), specialSkillActions.getFirst().getName(), "Item"};
         List<List<Action>> action2dList = List.of(basicAttackActions, defendActions, specialSkillActions, useItemActions);
+        Boolean[] action2dListSkipOnSingle = {true, true, true, false}; // Skip past submenu if only 1 option for everything except item
 
         // Get the action
-        Action actionToApply = TextboxPlayerInput.askAction2D(action2dListName, action2dList);
+        Action actionToApply = TextboxPlayerInput.askAction2D(action2dListName, action2dList, action2dListSkipOnSingle);
 
         if(actionToApply == null) return; // This should only appear if there's no valid actions to do. Somehow.
 
@@ -73,7 +74,9 @@ public abstract class Player extends Combatant {
             performAction(battleContext); return; // Rerun
         }
 
-        Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList());
+        // Skip the target selection only if the only possible target is this
+        boolean skipSelection = Arrays.equals(validTargets, new Combatant[]{this});
+        Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), skipSelection);
         if(target == null){
             performAction(battleContext); return; // Rerun (cancelled option)
         }

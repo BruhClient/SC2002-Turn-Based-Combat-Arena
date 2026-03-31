@@ -35,33 +35,36 @@ public class TextboxPlayerInput {
 		}
 	}
 
-	///  @see #askGeneral(String, String[], List, boolean)
-	public static <T> T askGeneral(String query, String[] descList, ArrayList<T> optionList, boolean allowBacktrack){
-		return askGeneral(query, descList, optionList.stream().toList(), allowBacktrack);
+	///  @see #askGeneral(String, String[], List, boolean, boolean)
+	public static <T> T askGeneral(String query, String[] descList, ArrayList<T> optionList, boolean allowBacktrack, boolean skipSingleOption){
+		return askGeneral(query, descList, optionList.stream().toList(), allowBacktrack, skipSingleOption);
 	}
-	///  @see #askGeneral(String, String[], List, boolean)
-	public static <T> T askGeneral(String query, String[] descList,  T[] optionList, boolean allowBacktrack){
-		return askGeneral(query, descList, Arrays.stream(optionList).toList(), allowBacktrack);
+	///  @see #askGeneral(String, String[], List, boolean, boolean)
+	public static <T> T askGeneral(String query, String[] descList,  T[] optionList, boolean allowBacktrack, boolean skipSingleOption){
+		return askGeneral(query, descList, Arrays.stream(optionList).toList(), allowBacktrack, skipSingleOption);
 	}
 	/**
 	 * Ask for user input to pick between an option in optionList with text displayed in queryList
-	 * Special cases: Returns null if no possible options, returns the only option if there is only one.
+	 * Special cases: Returns null if no possible options
 	 *
 	 * @param query String to display when asking user for input
 	 * @param descList Lists of string to display for each corresponding optionList
 	 * @param optionList Object that is selected (returned) by user
 	 * @param allowCancel Gives the user to select 0 to backtrack in the menu. This returns a null.
+	 * @param skipSingleOption If there is only one possible choice, automatically picks the choice without asking
 	 * @return Option picked from optionList
 	 * @param <T> Action, Item, Combatant, etc
 	 */
-	public static <T> T askGeneral(String query, String[] descList, List<T> optionList, boolean allowCancel){
+	public static <T> T askGeneral(String query, String[] descList, List<T> optionList, boolean allowCancel, boolean skipSingleOption){
 		int length = descList.length;
 
+		// Immediately return null if no options to pick
 		if(optionList.isEmpty()) {
 			System.out.println("There are no options to pick!");
 			return null;
 		};
-		if(optionList.size() == 1) return optionList.getFirst();
+		// If skipSingleOption, immediately returns the only option
+		if(optionList.size() == 1 && skipSingleOption) return optionList.getFirst();
 
 		if(allowCancel){
 			System.out.println("0 - Cancel");
@@ -84,37 +87,37 @@ public class TextboxPlayerInput {
 	 * Ask for user input to selects a combatant in combatantList. <br>
 	 * combatantList will usually be from the battle context's getEnemyCombatants or getPlayerCombatants.
 	 * (Note that getting combatants from battlecontext already filters out dead combatants.)
-	 * @see #askGeneral(String, String[], List, boolean)
+	 * @see #askGeneral(String, String[], List, boolean, boolean)
 	 * @param combatantList List of combatants.
 	 * @see BattleContext#getEnemyCombatants()
 	 * @see BattleContext#getPlayerCombatants()
 	 * @return Selected combatant
 	 */
-	public static <T extends Combatant> T askCombatant(List<T> combatantList){
+	public static <T extends Combatant> T askCombatant(List<T> combatantList, boolean skipSingleOption){
 		String[] descList = combatantList.stream()
 				.map(Combatant::getName)
 				.toArray(String[]::new);
-		return askGeneral("Select a target: ", descList, combatantList, true);
+		return askGeneral("Select a target: ", descList, combatantList, true, skipSingleOption);
 	}
 
 	/**
 	 * Ask for user input to selects an action in actionList.
-	 * @see #askGeneral(String, String[], List, boolean)
+	 * @see #askGeneral(String, String[], List, boolean, boolean)
 	 * @param actionList List of actions.
 	 * @return Selected item
 	 */
-	public static Action askAction(List<Action> actionList){
+	public static Action askAction(List<Action> actionList, boolean skipSingleOption){
 		String[] descList = actionList.stream()
 				.map(Action::getName)
 				.toArray(String[]::new);
-		return askGeneral("Select an action: ", descList, actionList, true);
+		return askGeneral("Select an action: ", descList, actionList, true, skipSingleOption);
 	}
-	/// @see #askAction(List, String)
-	public static Action askAction(List<Action> actionList, String query){
+	/// @see #askAction(List, String, boolean)
+	public static Action askAction(List<Action> actionList, String query, boolean skipSingleOption){
 		String[] descList = actionList.stream()
 				.map(Action::getName)
 				.toArray(String[]::new);
-		return askGeneral(query, descList, actionList, true);
+		return askGeneral(query, descList, actionList, true, skipSingleOption);
 	}
 
 	/**
@@ -124,42 +127,48 @@ public class TextboxPlayerInput {
 	 *
 	 * @param action2dList A 2d list of a menu and submenu. Eg: {{basic}, {defend}, {}, {item1, item2}},
 	 * @param descList A list for the selection in the top menu ("Basic Attack", "Defend", ...)
+	 * @param skipSingleOptionList A boolean list for whether each menu should skip selection if there is only a single option.
+	 *                             Good idea to keep this as true for everything except items.
 	 * @return Action chosen
 	 */
-	public static Action askAction2D(String[] descList, List<List<Action>> action2dList){
+	public static Action askAction2D(String[] descList, List<List<Action>> action2dList, Boolean[] skipSingleOptionList){
 
 		List<List<Action>> action2dList_filt = new ArrayList<>();
 		List<String> descList_filt = new ArrayList<>();
+		List<Boolean> skipSingleOptionList_filt = new ArrayList<>();
 
 		// If action2dList element is empty, remove it.
 		for (int i = 0; i < descList.length; i++) {
 			if (!action2dList.get(i).isEmpty()){
 				action2dList_filt.add(action2dList.get(i));
 				descList_filt.add(descList[i]);
+				skipSingleOptionList_filt.add(skipSingleOptionList[i]);
 			}
 		}
 
-		List<Action> innerMenuList = askGeneral("Select an action: ", descList_filt.toArray(String[]::new), action2dList_filt, false);
+		// Select main menu
+		List<Action> innerMenuList = askGeneral("Select an action: ", descList_filt.toArray(String[]::new), action2dList_filt, false, false);
 		if(innerMenuList == null) return null;
 		int optionNumber = action2dList_filt.indexOf(innerMenuList);
 
-		Action selectedAction = askAction(innerMenuList, "Select " + descList[optionNumber] + ": ");
+		// Select sub-menu
+		Action selectedAction = askAction(innerMenuList, "Select " + descList_filt.stream().toList().get(optionNumber) + ": ", skipSingleOptionList_filt.stream().toList().get(optionNumber));
 		if (selectedAction == null){
-			return askAction2D(descList_filt.toArray(String[]::new), action2dList_filt); // Go up the menu
+			return askAction2D(descList, action2dList, skipSingleOptionList); // Go up the menu
 		}
 		return selectedAction;
 	}
 
 	/**
 	 * Ask for user input to selects an item in itemList.
-	 * @see #askGeneral(String, String[], List, boolean)
+	 * @see #askGeneral(String, String[], List, boolean, boolean)
 	 * @param itemList List of items.
 	 * @return Selected item
 	 */
-	public static Item askItem(List<Item> itemList){
+	public static Item askItem(List<Item> itemList, boolean skipSingleOption){
 		String[] descList = itemList.stream()
 				.map(Item::getName)
 				.toArray(String[]::new);
-		return askGeneral("Select an item: ", descList, itemList, true);
+		return askGeneral("Select an item: ", descList, itemList, true, skipSingleOption);
 	}
 }
