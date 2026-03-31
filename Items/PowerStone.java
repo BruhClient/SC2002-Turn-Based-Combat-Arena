@@ -16,6 +16,6 @@ public class PowerStone extends Item {
 
 		// TO-DO: relook after special skill is done
 		SpecialSkillAction specialAction = new SpecialSkillAction();
-		user.performAction(specialAction, useTarget, context);
+		user.performAction(context);
 	};
 }

@@ -74,7 +74,5 @@ public abstract class Combatant {
     public void addHp(int addHp) { setHp(hp + addHp); }
     public void setDefense(int defense) { this.defense = defense; }
 
-    public void performAction(Action action, Combatant target, BattleContext battleContext){
-        action.execute(this, target, battleContext);
-    };
+    public abstract void performAction(BattleContext battleContext);
 }

@@ -40,4 +40,8 @@ public abstract class Player extends Combatant {
     public void setSpecialCooldown(int cooldown) {
         this.specialCooldown = cooldown;
     }
+
+    public void performAction(BattleContext battleContext){
+        // TODO
+    }
 }
