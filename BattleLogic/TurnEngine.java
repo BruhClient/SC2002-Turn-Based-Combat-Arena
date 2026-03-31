@@ -1,5 +1,6 @@
 package BattleLogic;
 
+import BattleLogic.Textbox.TextboxBattleInfo;
 import Combatants.Combatant;
 import BattleLogic.SpawnPatterns.LevelSpawns;
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class TurnEngine {
 		runStartTurnEffects(turnOrderStrategy);
 		runCombatantActions(turnOrderStrategy);
 		runEndTurnEffects(turnOrderStrategy);
+
+		// Display stats!
+	    TextboxBattleInfo textboxBattleInfo = new TextboxBattleInfo();
+		textboxBattleInfo.printBattleInfo(turnOrderStrategy.getCombatantOrderList());
 	}
 
 	private void runStartTurnEffects(TurnOrderStrategy turnOrderStrategy){
