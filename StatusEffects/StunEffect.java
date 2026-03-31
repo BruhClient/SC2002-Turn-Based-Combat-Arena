@@ -4,6 +4,7 @@ import Combatants.Combatant;
 public class StunEffect extends StatusEffect{
   public StunEffect(int duration){
     super(duration);
+    statModifier.disableAction();
   }
   public void onApply(Combatant target){
     System.out.println(target.getName()+" is stunned!");

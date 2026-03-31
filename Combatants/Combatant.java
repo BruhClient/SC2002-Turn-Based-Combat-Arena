@@ -1,6 +1,8 @@
 package Combatants;
 import BattleLogic.BattleContext;
 import StatusEffects.StatusEffect;
+import jdk.jshell.Snippet;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import static java.lang.Math.clamp;
@@ -27,9 +29,8 @@ public abstract class Combatant {
         return name;
     }
 
-    public void takeDamage(int dmg) {
-        hp -= dmg;
-        if (hp < 0) hp = 0;
+    public ArrayList<StatusEffect> getStatusEffect(){
+        return statusEffects;
     }
 
     public boolean isAlive() {
@@ -60,17 +61,46 @@ public abstract class Combatant {
         statusEffects.add(effect);
     }
 
-    public int getHp()      { return hp; }
-    public int getMaxHp()   { return maxHp; }
-    public int getAttack()  { return attack; }
-    public int getDefense() { return defense; }
-    public int getSpeed()   { return speed; }
+    public int getHp() {
+        int effectHp = hp;
+        for (StatusEffect status : statusEffects) { hp += status.statModifier.getHp();}
+        return effectHp;
+    }
+    public int getMaxHp()   {
+        int effectMaxHp = maxHp;
+        for (StatusEffect status : statusEffects) { effectMaxHp += status.statModifier.getMaxHp();}
+        return effectMaxHp;
+    }
+    public int getAttack()  {
+        int effectAttack = attack;
+        for (StatusEffect status : statusEffects) { effectAttack += status.statModifier.getAttack();}
+        return effectAttack;
+    }
+    public int getDefense() {
+        int effectDefense = defense;
+        for (StatusEffect status : statusEffects) { effectDefense += status.statModifier.getDefense();}
+        return effectDefense;
+    }
+    public int getSpeed() {
+        int effectSpeed = speed;
+        for (StatusEffect status : statusEffects) { effectSpeed += status.statModifier.getSpeed();}
+        return effectSpeed;
+    }
 
     public void setHp(int newHp) {
         this.hp = clamp(newHp, 0, maxHp);
     }
     public void addHp(int addHp) { setHp(hp + addHp); }
-    public void setDefense(int defense) { this.defense = defense; }
 
+    public void startAction(BattleContext battleContext){
+        for (StatusEffect status : statusEffects) {
+            if (status.statModifier.getDisableAction()){
+                // Skip turn!!!
+                System.out.println(this.name + "can't move - their action was skipped!");
+                return;
+            }
+        }
+        performAction(battleContext);
+    }
     public abstract void performAction(BattleContext battleContext);
 }

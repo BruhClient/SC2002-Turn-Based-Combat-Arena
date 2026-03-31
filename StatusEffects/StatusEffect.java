@@ -15,4 +15,6 @@ public abstract class StatusEffect{
     return remainingTurns <= 0;
   }
   public abstract String getName();
+
+  public StatusEffects.StatModifier statModifier = new StatModifier();
 }

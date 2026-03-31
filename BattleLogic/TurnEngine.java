@@ -3,7 +3,6 @@ package BattleLogic;
 import BattleLogic.Textbox.TextboxBattleInfo;
 import Combatants.Combatant;
 import BattleLogic.SpawnPatterns.LevelSpawns;
-import Combatants.Enemies.*;
 
 import java.util.ArrayList;
 
@@ -56,7 +55,7 @@ public class TurnEngine {
 	private void runCombatantActions(TurnOrderStrategy turnOrderStrategy){
 		for (Combatant combatant : turnOrderStrategy.getCombatantOrderList()) {
 			if (combatant.isAlive()){
-				combatant.performAction(battleContext); // Run action
+				combatant.startAction(battleContext); // Run action
 			}
 		}
 	}
