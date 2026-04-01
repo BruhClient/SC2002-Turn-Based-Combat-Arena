@@ -8,13 +8,16 @@ import java.util.List;
  * Instance storing all the enemies the level wants to spawn.
  * Wave 2 functions as backup spawn.
  */
-public class LevelSpawns {
-	private ArrayList<ArrayList<Combatant>> waveList = new ArrayList<>();
-
-	public LevelSpawns(ArrayList<ArrayList<Combatant>> waveList) {
-		this.waveList = waveList;
+public abstract class LevelSpawns {
+	private final ArrayList<ArrayList<Combatant>> waveList = new ArrayList<>();
+	public LevelSpawns() {
+		SpawnPattern();
 	}
-	public LevelSpawns() {}
+
+	/**
+	 * Function that is ran on construction. addSpawn methods should be added here.
+	 */
+	abstract void SpawnPattern();
 
 	public void addSpawn(int waveNum, Combatant combatant){
 		while(getMaxWave() < waveNum){
