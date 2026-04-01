@@ -2,9 +2,12 @@ package BattleLogic.Textbox;
 import Combatants.Combatant;
 import Combatants.Stats.Stat;
 import Combatants.Stats.StatList;
+import StatusEffects.StatusEffect;
+
 import static Combatants.Stats.StatList.StatType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TextboxBattleInfo {
 
@@ -20,6 +23,7 @@ public class TextboxBattleInfo {
 
 		String name = combatant.getName();
 		StatList statList = combatant.getStatList();
+		List<StatusEffect> statusEffects = combatant.getStatusEffect();
 
 		String printStr = name;
 		printStr = extendStringSpace(printStr, 20); // Makes stats look nicer
@@ -27,7 +31,7 @@ public class TextboxBattleInfo {
 		for (StatType statType : StatType.values()){
 			Stat stats = statList.getStat(statType);
 			String icon = stats.getIcon();
-			int val = stats.getStat();
+			int val = statList.getEffectiveStat(statType, statusEffects);
 			printStr += " "+icon+val;
 
 			int maxVal = stats.getMaxStat();
@@ -37,10 +41,16 @@ public class TextboxBattleInfo {
 		}
 
 		printStr = extendStringSpace(printStr, 43);
-		printStr += "[status]";
 
-		//TODO - show status effects (can we give each of them a cool emote icon plsplspls)
-		// 🟇⛉♒︎ 🧪🔮💣
+		// Status icons!
+		for (StatusEffect statusEffect : combatant.getStatusEffect()){
+			printStr += " " + statusEffect.getIcon();
+			if (statusEffect.getRemainingTurns() < Integer.MAX_VALUE){
+				printStr += statusEffect.getRemainingTurns();
+			} else { printStr += "Ꝏ"; }
+		}
+
+		// 🟇
 
 		System.out.println(printStr);
 	}

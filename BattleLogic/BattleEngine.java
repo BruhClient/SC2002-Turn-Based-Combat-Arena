@@ -1,5 +1,6 @@
 package BattleLogic;
 
+import BattleLogic.Textbox.TextboxBattleInfo;
 import Combatants.Players.Player;
 import BattleLogic.SpawnPatterns.LevelSpawns;
 
@@ -57,10 +58,26 @@ public class BattleEngine {
 		return turnEngine.getBattleContext().getEnemyCount() == 0;
 	}
 
-	private void endBattleWin(){
-		System.out.println("end battle - WIN!");
+	private void endBattleWin()
+	{
+		System.out.println("YOU WIN!!!!");
+		printEndBattleInfo();
+		afterBattleQuery();
 	}
-	private void endBattleLoss(){
-		System.out.println("end battle - loss :(");
+	private void endBattleLoss()
+	{
+		System.out.println("You lost the battle...");
+		printEndBattleInfo();
+		afterBattleQuery();
+	}
+	private void printEndBattleInfo(){
+		TextboxBattleInfo textboxBattleInfo = new TextboxBattleInfo();
+		TurnOrderStrategy turnOrderStrategy = new TurnOrderStrategy(turnEngine.getBattleContext().getCombatants());
+		System.out.println("Final Stats | Wave " + turnEngine.getBattleContext().getWaveNum() + " / Turn " + turnEngine.getBattleContext().getTurnNum());
+		textboxBattleInfo.printBattleInfo(turnOrderStrategy.getCombatantOrderList());
+	}
+	private void afterBattleQuery(){
+		//TODO - ask for replay same settings, replay, or quit
+		System.out.println("next-battle-query goes here");
 	}
 }

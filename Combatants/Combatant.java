@@ -10,9 +10,9 @@ import static Combatants.Stats.StatList.StatType.*;
 import static java.lang.Math.clamp;
 
 public abstract class Combatant {
-    private String name;
-    private StatList stats;
-    private ArrayList<StatusEffect> statusEffects = new ArrayList<>();
+    private final String name;
+    private final StatList stats;
+    private final ArrayList<StatusEffect> statusEffects = new ArrayList<>();
 
     public Combatant(String name, int maxHp, int attack, int defense, int speed) {
         this.name = name;
@@ -59,26 +59,7 @@ public abstract class Combatant {
         return stats;
     }
     public int getStat(StatList.StatType statType){
-        int num = stats.getVal(statType);
-        for (StatusEffect status : statusEffects) {
-            num += status.statModifier.getStat(statType).getStat();
-        }
-
-        return clamp(num, getMinStat(statType), getMaxStat(statType));
-    }
-    public int getMaxStat(StatList.StatType statType){
-        int num = stats.getMaxVal(statType);
-        for (StatusEffect status : statusEffects) {
-            num += status.statModifier.getStat(statType).getMaxStat();
-        }
-        return num;
-    }
-    public int getMinStat(StatList.StatType statType){
-        int num = stats.getMinVal(statType);
-        for (StatusEffect status : statusEffects) {
-            num += status.statModifier.getStat(statType).getMinStat();
-        }
-        return num;
+        return stats.getEffectiveStat(statType, statusEffects);
     }
 
     public void setHp(int newHp) { stats.getStat(HP).setStatClamp(newHp); }
@@ -88,7 +69,7 @@ public abstract class Combatant {
         for (StatusEffect status : statusEffects) {
             if (status.statModifier.getDisableAction()){
                 // Skip turn!!!
-                System.out.println(this.name + "can't move - their action was skipped!");
+                System.out.println(this.name + " can't move - their action was skipped!");
                 return;
             }
         }

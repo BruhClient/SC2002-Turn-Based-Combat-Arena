@@ -8,9 +8,8 @@ import java.util.Random;
 
 /** Additional feature (i wanted to test stuff)
  * Showcases enemy targeting, and non-consumed items. <br>
- * 1/2 chance to do nothing,
- * 1/2 chance to stun an enemy,
- * 1/2 chance to stun an enemy AND get consumed
+ * 2/3 chance to do nothing,
+ * 1/3 chance to stun an enemy and get consumed
  *
  **/
 public class Stunfish extends Item {
@@ -20,22 +19,17 @@ public class Stunfish extends Item {
 	public void useEffect(Combatant user, Combatant useTarget, BattleContext context)
 	{
 		Random random = new Random();
-		boolean success = random.nextInt(2) == 1;
+		boolean success = random.nextInt(3) == 1;
 
 		if (success){
-			StunEffect newStatus = new StunEffect(2);
+			StunEffect newStatus = new StunEffect(3);
 			useTarget.addStatusEffect(newStatus);
-			System.out.println(useTarget.getName() + " has been stunned!");
 
-			boolean explode = random.nextInt(2) == 1;
-			if (explode){
-				System.out.println("The Stunfish exploded!");
-			} else {
-				System.out.println("The Stunfish did not explode. You can use it again!");
-			}
+			System.out.println("The Stunfish exploded!");
+			removeItem();
 		}
 		else {
-			System.out.println("The fish failed to work! It can be used again, however.");
+			System.out.println("The Stunfish failed to work! It can be used again, however.");
 		}
 	};
 

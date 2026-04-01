@@ -15,7 +15,7 @@ public class SmokeBomb extends Item {
 		useTarget.addStatusEffect(newStatus);
 		System.out.println(useTarget.getName() + " is now immune to attacks!");
 
-		removeItem(user);
+		removeItem();
 	};
 
 	@Override

@@ -23,7 +23,7 @@ public class PowerStone extends Item {
 		}
 		specialAction.execute(user, target, context);
 
-		removeItem(user);
+		removeItem();
 	};
 
 	@Override

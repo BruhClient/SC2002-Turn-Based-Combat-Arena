@@ -17,7 +17,7 @@ public class Potion extends Item {
 		user.addHp(healVal);
 		System.out.println(user.getStat(HP));
 
-		removeItem(user);
+		removeItem();
 	}
 
 	@Override

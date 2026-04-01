@@ -6,6 +6,7 @@ import BattleLogic.BattleContext;
 
 public abstract class Item {
 	private final String name;
+	protected Combatant user;
 
 	public Item(String name) {
 		this.name = name;
@@ -18,7 +19,7 @@ public abstract class Item {
 	 * @param context Battle Context
 	 */
 	public void use(Combatant user, Combatant useTarget, BattleContext context){
-
+		this.user = user;
 		if (user == useTarget){
 			System.out.println(user.getName() + " uses a " + this.getName() + "!");
 		} else {
@@ -49,7 +50,7 @@ public abstract class Item {
 	/// Called by item useEffect if it wants to.
 	/// This allows the Item itself to decide if it should be consumed,
 	/// and when it should be.
-	protected void removeItem(Combatant user){
+	protected void removeItem(){
 		if (user instanceof Player player){
 			player.RemoveItem(this);
 		}
