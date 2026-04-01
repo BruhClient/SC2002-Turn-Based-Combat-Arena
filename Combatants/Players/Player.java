@@ -17,13 +17,6 @@ public abstract class Player extends Combatant {
     public Player(String name, int maxHp, int attack, int defense, int speed) {
         super(name, maxHp, attack, defense, speed);
     }
-
-    public abstract void useSpecialSkill(BattleContext context);
-
-    public void useItem(Item item, Combatant target, BattleContext context) {
-        item.use(this, target, context);
-    }
-
     public void addItem(Item item) {
         items.add(item);
     }
@@ -32,9 +25,7 @@ public abstract class Player extends Combatant {
         items.remove(item);
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
+    public abstract void useSpecialSkill(BattleContext context);
 
     public int getSpecialCooldown() {
         return specialCooldown;
