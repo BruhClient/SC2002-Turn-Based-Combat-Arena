@@ -1,5 +1,6 @@
 package StatusEffects;
 import Combatants.Combatant;
+import Combatants.Stats.StatModifier;
 
 public abstract class StatusEffect{
   protected int remainingTurns;
@@ -16,5 +17,5 @@ public abstract class StatusEffect{
   }
   public abstract String getName();
 
-  public StatusEffects.StatModifier statModifier = new StatModifier();
+  public StatModifier statModifier = new StatModifier();
 }

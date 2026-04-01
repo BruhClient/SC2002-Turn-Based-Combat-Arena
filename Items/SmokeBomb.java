@@ -6,13 +6,16 @@ import Combatants.Combatant;
 
 public class SmokeBomb extends Item {
 	public SmokeBomb() {
-		super("Smoke Bomb", true, true);
+		super("Smoke Bomb");
 	}
 	public void useEffect(Combatant user, Combatant useTarget, BattleContext context)
 	{
 		// Give useTarget SmokeBombEffect
 		SmokeBombEffect newStatus = new SmokeBombEffect(2);
 		useTarget.addStatusEffect(newStatus);
+		System.out.println(useTarget.getName() + " is now immune to attacks!");
+
+		removeItem(user);
 	};
 
 	@Override

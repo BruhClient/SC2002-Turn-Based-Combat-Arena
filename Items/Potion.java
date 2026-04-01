@@ -3,16 +3,21 @@ package Items;
 import BattleLogic.BattleContext;
 import Combatants.Combatant;
 
+import static Combatants.Stats.StatList.StatType.HP;
+
+/// Adds 100 hp to the user
 public class Potion extends Item {
 	final static private int healVal = 100;
 	public Potion() {
-		super("Potion", true, true);
+		super("Potion");
 	}
 
 	public void useEffect(Combatant user, Combatant useTarget, BattleContext context){
-		System.out.print(user.getName() + " healed " + healVal + " HP! ❤" + user.getHp() + ">");
+		System.out.print(user.getName() + " healed " + healVal + " HP! ❤" + user.getStat(HP) + ">");
 		user.addHp(healVal);
-		System.out.println(user.getHp());
+		System.out.println(user.getStat(HP));
+
+		removeItem(user);
 	}
 
 	@Override

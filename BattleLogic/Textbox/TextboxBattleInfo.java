@@ -1,5 +1,8 @@
 package BattleLogic.Textbox;
 import Combatants.Combatant;
+import Combatants.Stats.Stat;
+import Combatants.Stats.StatList;
+import static Combatants.Stats.StatList.StatType;
 
 import java.util.ArrayList;
 
@@ -16,18 +19,23 @@ public class TextboxBattleInfo {
 	private void printCombatantInfo(Combatant combatant){
 
 		String name = combatant.getName();
-		int hp = combatant.getHp();
-		int maxHp = combatant.getMaxHp();
-		int speed = combatant.getSpeed();
-		int attack = combatant.getAttack();
-		int defense = combatant.getDefense();
+		StatList statList = combatant.getStatList();
 
 		String printStr = name;
 		printStr = extendStringSpace(printStr, 20); // Makes stats look nicer
-		printStr += " ❤"+hp+"/"+maxHp;
-		printStr += " ❯"+speed;
-		printStr += " ⚔"+attack;
-		printStr += " ⛊"+defense;
+
+		for (StatType statType : StatType.values()){
+			Stat stats = statList.getStat(statType);
+			String icon = stats.getIcon();
+			int val = stats.getStat();
+			printStr += " "+icon+val;
+
+			int maxVal = stats.getMaxStat();
+			if (maxVal < Integer.MAX_VALUE){
+				printStr += "/"+maxVal;
+			}
+		}
+
 		printStr = extendStringSpace(printStr, 43);
 		printStr += "[status]";
 

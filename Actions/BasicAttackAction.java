@@ -4,6 +4,8 @@ import BattleLogic.BattleContext;
 import Combatants.Combatant;
 import StatusEffects.StatusEffect;
 
+import static Combatants.Stats.StatList.StatType.*;
+
 public class BasicAttackAction implements Action{
   public void execute(Combatant user, Combatant target, BattleContext context){
 
@@ -14,7 +16,7 @@ public class BasicAttackAction implements Action{
       }
     }
 
-    int damage=Math.max(0, user.getAttack()-target.getDefense());
+    int damage=Math.max(0, user.getStat(ATTACK)-target.getStat(DEFENSE));
     target.addHp(-damage);
     System.out.println(user.getName()+" attacks "+target.getName()+" for "+damage+" damage.");
   }

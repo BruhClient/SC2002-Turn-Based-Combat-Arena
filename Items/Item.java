@@ -6,13 +6,9 @@ import BattleLogic.BattleContext;
 
 public abstract class Item {
 	private final String name;
-	private final boolean consumeOnUse; // Always true for this project
-	private final boolean alwaysTargetSelf;
 
-	public Item(String name, boolean consumeOnUse, boolean alwaysTargetSelf) {
+	public Item(String name) {
 		this.name = name;
-		this.consumeOnUse = consumeOnUse;
-		this.alwaysTargetSelf = alwaysTargetSelf;
 	}
 
 	/**
@@ -30,7 +26,6 @@ public abstract class Item {
 		}
 
 		useEffect(user, useTarget, context);
-		if(consumeOnUse) removeItem(user);
 	};
 
 	/**
@@ -51,7 +46,10 @@ public abstract class Item {
 	/// Returns an array of combatants that this items should be usable on.
 	public abstract Combatant[] getValidTargets(Combatant user, BattleContext context);
 
-	private void removeItem(Combatant user){
+	/// Called by item useEffect if it wants to.
+	/// This allows the Item itself to decide if it should be consumed,
+	/// and when it should be.
+	protected void removeItem(Combatant user){
 		if (user instanceof Player player){
 			player.RemoveItem(this);
 		}

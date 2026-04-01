@@ -1,27 +1,22 @@
 package Combatants;
 import BattleLogic.BattleContext;
+import Combatants.Stats.StatList;
 import StatusEffects.StatusEffect;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import static Combatants.Stats.StatList.StatType.*;
 import static java.lang.Math.clamp;
 
 public abstract class Combatant {
     private String name;
-    private int hp;
-    private int maxHp;
-    private int attack;
-    private int defense;
-    private int speed;
+    private StatList stats;
     private ArrayList<StatusEffect> statusEffects = new ArrayList<>();
 
     public Combatant(String name, int maxHp, int attack, int defense, int speed) {
         this.name = name;
-        this.maxHp = maxHp;
-        this.hp = maxHp;
-        this.attack = attack;
-        this.defense = defense;
-        this.speed = speed;
+        this.stats = new StatList(maxHp, attack, defense, speed);
     }
 
     public String getName() {
@@ -33,7 +28,7 @@ public abstract class Combatant {
     }
 
     public boolean isAlive() {
-        return hp > 0;
+        return stats.getVal(HP) > 0;
     }
 
     public void applyStatusEffectsStart() {
@@ -60,36 +55,34 @@ public abstract class Combatant {
         statusEffects.add(effect);
     }
 
-    public int getHp() {
-        int effectHp = hp;
-        for (StatusEffect status : statusEffects) { hp += status.statModifier.getHp();}
-        return effectHp;
+    public StatList getStatList(){
+        return stats;
     }
-    public int getMaxHp()   {
-        int effectMaxHp = maxHp;
-        for (StatusEffect status : statusEffects) { effectMaxHp += status.statModifier.getMaxHp();}
-        return effectMaxHp;
+    public int getStat(StatList.StatType statType){
+        int num = stats.getVal(statType);
+        for (StatusEffect status : statusEffects) {
+            num += status.statModifier.getStat(statType).getStat();
+        }
+
+        return clamp(num, getMinStat(statType), getMaxStat(statType));
     }
-    public int getAttack()  {
-        int effectAttack = attack;
-        for (StatusEffect status : statusEffects) { effectAttack += status.statModifier.getAttack();}
-        return effectAttack;
+    public int getMaxStat(StatList.StatType statType){
+        int num = stats.getMaxVal(statType);
+        for (StatusEffect status : statusEffects) {
+            num += status.statModifier.getStat(statType).getMaxStat();
+        }
+        return num;
     }
-    public int getDefense() {
-        int effectDefense = defense;
-        for (StatusEffect status : statusEffects) { effectDefense += status.statModifier.getDefense();}
-        return effectDefense;
-    }
-    public int getSpeed() {
-        int effectSpeed = speed;
-        for (StatusEffect status : statusEffects) { effectSpeed += status.statModifier.getSpeed();}
-        return effectSpeed;
+    public int getMinStat(StatList.StatType statType){
+        int num = stats.getMinVal(statType);
+        for (StatusEffect status : statusEffects) {
+            num += status.statModifier.getStat(statType).getMinStat();
+        }
+        return num;
     }
 
-    public void setHp(int newHp) {
-        this.hp = clamp(newHp, 0, maxHp);
-    }
-    public void addHp(int addHp) { setHp(hp + addHp); }
+    public void setHp(int newHp) { stats.getStat(HP).setStatClamp(newHp); }
+    public void addHp(int addHp) { stats.getStat(HP).addStat(addHp); }
 
     public void startAction(BattleContext battleContext){
         for (StatusEffect status : statusEffects) {

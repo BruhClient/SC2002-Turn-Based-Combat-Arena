@@ -1,11 +1,13 @@
 package StatusEffects;
 import Combatants.Combatant;
 
+import static Combatants.Stats.StatList.StatType.*;
+
 public class DefendEffect extends StatusEffect{
   private static final int DEFENSE_BONUS=10;
   public DefendEffect(int duration){
     super(duration);
-    statModifier.changeDefense(DEFENSE_BONUS);
+    statModifier.changeStat(DEFENSE, DEFENSE_BONUS);
   }
   public void onApply(Combatant target){
       System.out.println(target.getName()+"'s defense increased!");
