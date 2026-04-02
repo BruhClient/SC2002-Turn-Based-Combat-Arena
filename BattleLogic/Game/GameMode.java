@@ -29,7 +29,7 @@ public class GameMode {
 	private int itemCount = 1;
 	private final List<Supplier<LevelSpawns>> levelSpawnOptions;
 
-	private String name;
+	private final String name;
 
 	public GameMode(String name, List<Supplier<? extends Player>> playerOptions,
 					int playerCount, List<Supplier<? extends Item>> itemOptions,
