@@ -14,6 +14,7 @@ public class GameEngine {
 		// GM_base corresponds to the GameMode for 1 player, 2 items, Spawns_baseX as level spawns.
 		// (All the things that the assignment specifications need)
 		modeOptions.add(GM_base::new);
+		//modeOptions.add(GM_test::new);
 
 		// This allows for extending to include more GameMode
 	}
@@ -37,6 +38,6 @@ public class GameEngine {
 
 		// Starts GameMode
 		boolean success = selectedGamemode.selectBattle();
-		if (!success) { startGame(); }
+		if (!success) { selectGamemode(); }
 	}
 }

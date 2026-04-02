@@ -50,7 +50,7 @@ public class GameMode {
 				.map(Supplier::get)
 				.map(LevelSpawns::getName)
 				.toArray(String[]::new);
-		Supplier<LevelSpawns> selectedSpawn = TextboxPlayerInput.askGeneral("Select a difficulty: ", levelSpawnNames, levelSpawnOptions, CAN_CANCEL, true);
+		Supplier<LevelSpawns> selectedSpawn = TextboxPlayerInput.askGeneral("Select a difficulty: ", levelSpawnNames, levelSpawnOptions, CAN_CANCEL, false);
 		if (selectedSpawn == null){ return false; }
 
 		// Show spawn information
