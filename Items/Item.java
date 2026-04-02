@@ -2,7 +2,7 @@ package Items;
 
 import Combatants.Players.Player;
 import Combatants.Combatant;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 
 public abstract class Item {
 	private final String name;

@@ -3,6 +3,11 @@ package BattleLogic.SpawnPatterns;
 import Combatants.Enemies.*;
 
 public class Spawns_LevelTest extends LevelSpawns {
+
+	public Spawns_LevelTest() {
+		super("Test");
+	}
+
 	@Override
 	void SpawnPattern() {
 		super.addSpawn(1, new TestEnemy("1A"));
@@ -15,4 +20,5 @@ public class Spawns_LevelTest extends LevelSpawns {
 		super.addSpawn(2, new TestEnemy2("2B"));
 		super.addSpawn(2, new TestEnemy());
 	}
+
 }

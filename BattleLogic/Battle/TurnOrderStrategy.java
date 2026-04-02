@@ -1,4 +1,4 @@
-package BattleLogic;
+package BattleLogic.Battle;
 
 import Combatants.Combatant;
 

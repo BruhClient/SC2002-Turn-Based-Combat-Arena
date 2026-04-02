@@ -4,7 +4,7 @@ import Actions.*;
 import BattleLogic.Textbox.TextboxPlayerInput;
 import Combatants.Combatant;
 import Items.Item;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +36,8 @@ public abstract class Player extends Combatant {
     }
 
     public void performAction(BattleContext battleContext){
+
+        System.out.println(getName() + "'s turn! Select an action!");
 
         // List all possible actions
         List<Action> basicAttackActions = List.of(new BasicAttackAction());

@@ -1,6 +1,6 @@
 package Items;
 
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import Combatants.Combatant;
 
 import static Combatants.Stats.StatList.StatType.HP;

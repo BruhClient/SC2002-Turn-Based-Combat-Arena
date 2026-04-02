@@ -1,6 +1,6 @@
 package Items;
 
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import StatusEffects.SmokeBombEffect;
 import Combatants.Combatant;
 

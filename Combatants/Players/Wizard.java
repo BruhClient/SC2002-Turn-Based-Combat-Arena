@@ -1,6 +1,6 @@
 package Combatants.Players;
 
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 
 public class Wizard extends Player {
     public Wizard() {

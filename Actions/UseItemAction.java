@@ -1,5 +1,5 @@
 package Actions;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import Items.Item;
 import Combatants.Combatant;
 

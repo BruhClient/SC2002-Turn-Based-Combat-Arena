@@ -1,7 +1,7 @@
 package Combatants.Enemies;
 
 import Actions.BasicAttackAction;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import Combatants.Combatant;
 import Combatants.Players.Player;
 

@@ -6,14 +6,13 @@ import StatusEffects.StatusEffect;
 
 import static Combatants.Stats.StatList.StatType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TextboxBattleInfo {
 
 	public TextboxBattleInfo() {}
 
-	public void printBattleInfo(ArrayList<Combatant> combatants){
+	public void printBattleInfo(List<Combatant> combatants){
 		for (Combatant combatant : combatants){
 			printCombatantInfo(combatant);
 		}

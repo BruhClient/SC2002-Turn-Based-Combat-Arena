@@ -1,7 +1,7 @@
 package BattleLogic.Textbox;
 
 import Actions.Action;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import Combatants.Combatant;
 import Items.Item;
 
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 /// Used for getting player input. (This do be an entirely static class.)
 public class TextboxPlayerInput {
@@ -98,6 +97,13 @@ public class TextboxPlayerInput {
 				.map(Combatant::getName)
 				.toArray(String[]::new);
 		return askGeneral("Select a target: ", descList, combatantList, true, skipSingleOption);
+	}
+	/// @see #askCombatant(List, boolean)
+	public static <T extends Combatant> T askCombatant(String query, List<T> combatantList, boolean skipSingleOption){
+		String[] descList = combatantList.stream()
+				.map(Combatant::getName)
+				.toArray(String[]::new);
+		return askGeneral(query, descList, combatantList, true, skipSingleOption);
 	}
 
 	/**

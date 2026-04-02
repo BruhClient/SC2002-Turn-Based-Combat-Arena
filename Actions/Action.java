@@ -1,5 +1,5 @@
 package Actions;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import Combatants.Combatant;
 
 public interface Action{

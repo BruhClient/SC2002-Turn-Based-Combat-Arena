@@ -1,6 +1,6 @@
 package Combatants.Players;
 
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 
 public class Warrior extends Player {
     public Warrior() {

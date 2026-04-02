@@ -1,5 +1,5 @@
 package Combatants;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import Combatants.Stats.StatList;
 import StatusEffects.StatusEffect;
 

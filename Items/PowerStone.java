@@ -1,7 +1,7 @@
 package Items;
 
 import Actions.SpecialSkillAction;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import BattleLogic.Textbox.TextboxPlayerInput;
 import Combatants.Combatant;
 

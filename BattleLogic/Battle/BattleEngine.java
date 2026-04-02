@@ -1,8 +1,13 @@
-package BattleLogic;
+package BattleLogic.Battle;
 
+import BattleLogic.Game.GameEngine;
 import BattleLogic.Textbox.TextboxBattleInfo;
-import Combatants.Players.Player;
+import BattleLogic.Textbox.TextboxPlayerInput;
+import Combatants.Combatant;
 import BattleLogic.SpawnPatterns.LevelSpawns;
+
+import java.util.ArrayList;
+import java.util.function.Supplier;
 
 /**
  * Handles running of battles (starting, turn effects, ending)
@@ -11,8 +16,21 @@ public class BattleEngine {
 
 	private TurnEngine turnEngine = null;
 
-	public void startBattle(Player playerCombatant, LevelSpawns levelSpawns){
-		turnEngine = new TurnEngine(levelSpawns, playerCombatant);
+	// Store these for allowing repeat round
+	private Supplier<LevelSpawns> levelSpawnsSupplier;
+	private ArrayList<PlayerItemSupplier> playerItemSupplyList;
+
+	public void startBattle(Supplier<LevelSpawns> levelSpawnsSupplier, ArrayList<PlayerItemSupplier> playerItemSupplyList){
+
+		this.levelSpawnsSupplier = levelSpawnsSupplier;
+		this.playerItemSupplyList = playerItemSupplyList;
+
+		ArrayList<Combatant> playerCombatants = new ArrayList<>();
+		for (PlayerItemSupplier pis : playerItemSupplyList) {
+			playerCombatants.add(pis.getCombatant());
+		}
+
+		turnEngine = new TurnEngine(levelSpawnsSupplier.get(), playerCombatants);
 		loopTurn();
 	}
 
@@ -78,6 +96,21 @@ public class BattleEngine {
 	}
 	private void afterBattleQuery(){
 		//TODO - ask for replay same settings, replay, or quit
-		System.out.println("next-battle-query goes here");
+		System.out.println("Would you like to play again?");
+
+		String[] optionsDesc = {"Replay", "Replay with same settings", "Quit"};
+		Integer[] selection = {1, 2, 3};
+		int out = TextboxPlayerInput.askGeneral("Select option: ", optionsDesc, selection, false, false);
+
+		switch (out){
+			case 1:
+				GameEngine.selectGamemode();
+				break;
+			case 2:
+				BattleEngine battleEngine = new BattleEngine();
+				battleEngine.startBattle(levelSpawnsSupplier, playerItemSupplyList);
+				break;
+			default: return;
+		}
 	}
 }

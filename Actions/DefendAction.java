@@ -1,5 +1,5 @@
 package Actions;
-import BattleLogic.BattleContext;
+import BattleLogic.Battle.BattleContext;
 import StatusEffects.DefendEffect;
 import Combatants.Combatant;
 
