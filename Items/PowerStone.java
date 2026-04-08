@@ -25,9 +25,8 @@ public class PowerStone extends Item {
 			return;
 		}
 
-		// Skip target selection if the only target is self (e.g. Wizard's AoE)
-		boolean skipSelection = validTargets.length == 1 && validTargets[0] == user;
-		Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), skipSelection);
+		// Select target. (target selection if only one target)
+		Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), true);
 		if (target == null) {
 			System.out.println("The Power Stone was not used.");
 			return;

@@ -18,13 +18,4 @@ public abstract class Enemy extends Combatant {
             basicAttack.execute(this, target, context);
         }
     }
-
-    public boolean isStunned() {
-        for (StatusEffect status : getStatusEffect()) {
-            if (status.statModifier.getDisableAction()) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
