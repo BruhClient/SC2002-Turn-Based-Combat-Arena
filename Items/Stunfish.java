@@ -6,11 +6,10 @@ import StatusEffects.StunEffect;
 
 import java.util.Random;
 
-/** Additional feature (i wanted to test stuff)
+/** Test item. Fully implemented, but unused.
  * Showcases enemy targeting, and non-consumed items. <br>
  * 2/3 chance to do nothing,
  * 1/3 chance to stun an enemy and get consumed
- *
  **/
 public class Stunfish extends Item {
 	public Stunfish() {
