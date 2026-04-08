@@ -51,8 +51,8 @@ public abstract class Combatant {
     }
 
     public void addStatusEffect(StatusEffect effect) {
-        effect.onApply(this);
         statusEffects.add(effect);
+        effect.onApply(this);
     }
 
     public StatList getStatList(){
@@ -64,6 +64,26 @@ public abstract class Combatant {
 
     public void setHp(int newHp) { stats.getStat(HP).setStatClamp(newHp); }
     public void addHp(int addHp) { stats.getStat(HP).addStat(addHp); }
+
+    /**
+     * Deals damage to this, taking into account the defense stat.
+     * @param attackStat Damage to deal, before calculating defense
+     * @return Damage dealt.  (This does not factor in damage overflow from exceeding the 0hp limit)
+     */
+    public int dealDamage(int attackStat){
+        int dealtDamage = attackStat - this.getStat(DEFENSE);
+        addHp(-dealtDamage);
+        return dealtDamage;
+    }
+    /**
+     * Deals damage to this, taking into account the defense stat.
+     * @param attacker The combatant dealing damage. This combatant's attack stat will be used for calculations.
+     * @return Damage dealt. (This does not factor in damage overflow from exceeding the 0hp limit)
+     * @see #dealDamage(int)
+     */
+    public int dealDamage(Combatant attacker){
+        return dealDamage(attacker.getStat(ATTACK));
+    }
 
     public void startAction(BattleContext battleContext){
         for (StatusEffect status : statusEffects) {

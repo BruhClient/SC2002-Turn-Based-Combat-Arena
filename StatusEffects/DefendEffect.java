@@ -9,7 +9,7 @@ public class DefendEffect extends StatusEffect{
     super(duration, "⛉");
     statModifier.changeStat(DEFENSE, DEFENSE_BONUS);
   }
-  public void onApply(Combatant target){
+  public void onAdd(Combatant target){
       System.out.println(target.getName()+"'s defense increased!");
   }
   public void onTurnEnd(Combatant target){

@@ -6,7 +6,7 @@ public class StunEffect extends StatusEffect{
     super(duration, "♒︎");
     statModifier.disableAction();
   }
-  public void onApply(Combatant target){
+  public void onAdd(Combatant target){
     System.out.println(target.getName()+" is stunned!");
   }
   public String getName(){

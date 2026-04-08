@@ -16,8 +16,7 @@ public class BasicAttackAction implements Action{
       }
     }
 
-    int damage=Math.max(0, user.getStat(ATTACK)-target.getStat(DEFENSE));
-    target.addHp(-damage);
+    int damage=target.dealDamage(user);
     System.out.println(user.getName()+" attacks "+target.getName()+" for "+damage+" damage.");
   }
 

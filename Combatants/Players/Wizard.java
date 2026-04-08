@@ -3,6 +3,7 @@ package Combatants.Players;
 import BattleLogic.Battle.BattleContext;
 import Combatants.Combatant;
 import Combatants.Enemies.Enemy;
+import StatusEffects.ArcaneBlastEffect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +30,11 @@ public class Wizard extends Player {
         System.out.println(this.getName() + " unleashes Arcane Blast on all enemies!");
         List<Enemy> enemies = new ArrayList<>(context.getEnemyCombatants());
         for (Enemy enemy : enemies) {
-            int damage = Math.max(0, this.getStat(ATTACK) - enemy.getStat(DEFENSE));
-            enemy.addHp(-damage);
-            System.out.println(this.getName() + " blasts " + enemy.getName() + " for " + damage + " damage!");
+            int damageDealt = enemy.dealDamage(this);
+            System.out.println(this.getName() + " blasts " + enemy.getName() + " for " + damageDealt + " damage!");
             if (!enemy.isAlive()) {
-                this.getStatList().getStat(ATTACK).addStat(10);
-                System.out.println(enemy.getName() + " was eliminated by Arcane Blast! " + this.getName() + "'s Attack increased to " + this.getStat(ATTACK) + "!");
+                System.out.println(enemy.getName() + " was eliminated by Arcane Blast! ");
+                this.addStatusEffect(new ArcaneBlastEffect());
             }
         }
     }
