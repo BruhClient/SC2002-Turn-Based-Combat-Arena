@@ -1,30 +1,42 @@
 package Items;
 
-import Actions.SpecialSkillAction;
 import BattleLogic.Battle.BattleContext;
 import BattleLogic.Textbox.TextboxPlayerInput;
 import Combatants.Combatant;
+import Combatants.Players.Player;
 
-/// Gets the user to do a Special Skill
+import java.util.Arrays;
+
+/// Triggers the player's special skill without affecting the cooldown timer
 public class PowerStone extends Item {
 	public PowerStone() {
 		super("Power Stone");
 	}
 
-	public void useEffect(Combatant user, Combatant useTarget, BattleContext context)
-	{
-		// Grant special action to user
-		SpecialSkillAction specialAction = new SpecialSkillAction();
-
-		Combatant target = TextboxPlayerInput.askCombatant(context.getEnemyCombatants(), true);
-		if (target == null){
-			System.out.println("No valid target - The Power Stone was not used.");
+	public void useEffect(Combatant user, Combatant useTarget, BattleContext context) {
+		if (!(user instanceof Player player)) {
+			System.out.println("Only players can use Power Stone!");
 			return;
 		}
-		specialAction.execute(user, target, context);
 
+		Combatant[] validTargets = player.getSpecialSkillTargets(context);
+		if (validTargets == null || validTargets.length == 0) {
+			System.out.println("No valid targets - The Power Stone was not used.");
+			return;
+		}
+
+		// Skip target selection if the only target is self (e.g. Wizard's AoE)
+		boolean skipSelection = validTargets.length == 1 && validTargets[0] == user;
+		Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), skipSelection);
+		if (target == null) {
+			System.out.println("The Power Stone was not used.");
+			return;
+		}
+
+		// Trigger special skill - cooldown is intentionally NOT changed
+		player.useSpecialSkill(target, context);
 		removeItem();
-	};
+	}
 
 	@Override
 	public Combatant[] getValidTargets(Combatant user, BattleContext context) {

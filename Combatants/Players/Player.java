@@ -5,6 +5,7 @@ import BattleLogic.Textbox.TextboxPlayerInput;
 import Combatants.Combatant;
 import Items.Item;
 import BattleLogic.Battle.BattleContext;
+import StatusEffects.StatusEffect;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ public abstract class Player extends Combatant {
     public Player(String name, int maxHp, int attack, int defense, int speed) {
         super(name, maxHp, attack, defense, speed);
     }
+
     public void addItem(Item item) {
         items.add(item);
     }
@@ -25,7 +27,9 @@ public abstract class Player extends Combatant {
         items.remove(item);
     }
 
-    public abstract void useSpecialSkill(BattleContext context);
+    public abstract void useSpecialSkill(Combatant target, BattleContext context);
+
+    public abstract Combatant[] getSpecialSkillTargets(BattleContext context);
 
     public int getSpecialCooldown() {
         return specialCooldown;
@@ -35,43 +39,63 @@ public abstract class Player extends Combatant {
         this.specialCooldown = cooldown;
     }
 
-    public void performAction(BattleContext battleContext){
+    @Override
+    public void startAction(BattleContext battleContext) {
+        for (StatusEffect status : getStatusEffect()) {
+            if (status.statModifier.getDisableAction()) {
+                System.out.println(getName() + " can't move - their action was skipped!");
+                return;
+            }
+        }
+        performAction(battleContext);
+        if (specialCooldown > 0) {
+            specialCooldown--;
+        }
+    }
 
+    public void performAction(BattleContext battleContext) {
         System.out.println(getName() + "'s turn! Select an action!");
+        if (specialCooldown > 0) {
+            System.out.println("(Special Skill on cooldown: " + specialCooldown + " turns remaining)");
+        }
 
         // List all possible actions
         List<Action> basicAttackActions = List.of(new BasicAttackAction());
         List<Action> defendActions = List.of(new DefendAction());
-        List<Action> specialSkillActions = List.of(new SpecialSkillAction());
+        List<Action> specialSkillActions = new ArrayList<>();
+        if (specialCooldown == 0) {
+            specialSkillActions.add(new SpecialSkillAction());
+        }
         List<Action> useItemActions = new ArrayList<>();
-
         for (Item item : items) {
             useItemActions.add(new UseItemAction(item));
         }
 
         // Create possible action menu/submenu
-        String[] action2dListName = {basicAttackActions.getFirst().getName(), defendActions.getFirst().getName(), specialSkillActions.getFirst().getName(), "Item"};
+        String[] action2dListName = {basicAttackActions.getFirst().getName(), defendActions.getFirst().getName(), "Special Skill", "Item"};
         List<List<Action>> action2dList = List.of(basicAttackActions, defendActions, specialSkillActions, useItemActions);
-        Boolean[] action2dListSkipOnSingle = {true, true, true, false}; // Skip past submenu if only 1 option for everything except item
+        Boolean[] action2dListSkipOnSingle = {true, true, true, false};
 
         // Get the action
         Action actionToApply = TextboxPlayerInput.askAction2D(action2dListName, action2dList, action2dListSkipOnSingle);
 
-        if(actionToApply == null) return; // This should only appear if there's no valid actions to do. Somehow.
+        if (actionToApply == null) return;
 
         // Get target
         Combatant[] validTargets = actionToApply.getValidTargets(this, battleContext);
 
-        if(validTargets == null || validTargets.length == 0){
+        if (validTargets == null || validTargets.length == 0) {
             System.out.println("This action has no valid targets!");
-            performAction(battleContext); return; // Rerun
+            performAction(battleContext);
+            return;
         }
 
         // Skip the target selection only if the only possible target is this
         boolean skipSelection = Arrays.equals(validTargets, new Combatant[]{this});
         Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), skipSelection);
-        if(target == null){
-            performAction(battleContext); return; // Rerun (cancelled option)
+        if (target == null) {
+            performAction(battleContext);
+            return;
         }
 
         // Finally, run action

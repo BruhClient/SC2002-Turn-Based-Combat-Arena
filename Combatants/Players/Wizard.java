@@ -1,6 +1,13 @@
 package Combatants.Players;
 
 import BattleLogic.Battle.BattleContext;
+import Combatants.Combatant;
+import Combatants.Enemies.Enemy;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static Combatants.Stats.StatList.StatType.*;
 
 public class Wizard extends Player {
     public Wizard() {
@@ -8,11 +15,27 @@ public class Wizard extends Player {
     }
 
     @Override
-    public void useSpecialSkill(BattleContext context) {
+    public void useSpecialSkill(Combatant target, BattleContext context) {
         arcaneBlast(context);
     }
 
+    @Override
+    public Combatant[] getSpecialSkillTargets(BattleContext context) {
+        // AoE skill - return self so target selection is skipped automatically
+        return new Combatant[]{this};
+    }
+
     public void arcaneBlast(BattleContext context) {
-        // TODO: implement arcaneBlast
+        System.out.println(this.getName() + " unleashes Arcane Blast on all enemies!");
+        List<Enemy> enemies = new ArrayList<>(context.getEnemyCombatants());
+        for (Enemy enemy : enemies) {
+            int damage = Math.max(0, this.getStat(ATTACK) - enemy.getStat(DEFENSE));
+            enemy.addHp(-damage);
+            System.out.println(this.getName() + " blasts " + enemy.getName() + " for " + damage + " damage!");
+            if (!enemy.isAlive()) {
+                this.getStatList().getStat(ATTACK).addStat(10);
+                System.out.println(enemy.getName() + " was eliminated by Arcane Blast! " + this.getName() + "'s Attack increased to " + this.getStat(ATTACK) + "!");
+            }
+        }
     }
 }

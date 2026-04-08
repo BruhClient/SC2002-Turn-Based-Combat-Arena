@@ -1,6 +1,7 @@
 package Combatants.Players;
 
 import BattleLogic.Battle.BattleContext;
+import Combatants.Combatant;
 
 public class TestPlayer extends Player {
     public TestPlayer() {
@@ -8,7 +9,12 @@ public class TestPlayer extends Player {
     }
 
     @Override
-    public void useSpecialSkill(BattleContext context) {
-        //
+    public void useSpecialSkill(Combatant target, BattleContext context) {
+        // Test player has no special skill
+    }
+
+    @Override
+    public Combatant[] getSpecialSkillTargets(BattleContext context) {
+        return new Combatant[0];
     }
 }
