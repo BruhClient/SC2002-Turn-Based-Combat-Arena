@@ -22,8 +22,13 @@ public class Warrior extends Player {
     }
 
     public void shieldBash(Combatant target, BattleContext context) {
-        int damage = Math.max(0, this.getStat(ATTACK) - target.getStat(DEFENSE));
-        target.addHp(-damage);
+
+        if (target.isNegateDamage()){
+            System.out.println(getName()+" tried to perform Shield Bash on "+target.getName() + " but failed!");
+            return;
+        }
+
+        int damage = target.dealDamage(this);
         System.out.println(this.getName() + " performs Shield Bash on " + target.getName() + " for " + damage + " damage!");
         target.addStatusEffect(new StunEffect(2));
     }

@@ -86,14 +86,29 @@ public abstract class Combatant {
     }
 
     public void startAction(BattleContext battleContext){
-        for (StatusEffect status : statusEffects) {
-            if (status.statModifier.getDisableAction()){
-                // Skip turn!!!
-                System.out.println(this.name + " can't move - their action was skipped!");
-                return;
-            }
+        if (isStunned()){
+            System.out.println(this.name + " can't move - their action was skipped!");
+            return;
         }
         performAction(battleContext);
     }
+
+    public boolean isStunned(){
+        for (StatusEffect status : statusEffects) {
+            if (status.statModifier.getDisableAction()){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isNegateDamage(){
+        for (StatusEffect status : statusEffects) {
+            if (status.statModifier.getNegateDamage()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public abstract void performAction(BattleContext battleContext);
 }

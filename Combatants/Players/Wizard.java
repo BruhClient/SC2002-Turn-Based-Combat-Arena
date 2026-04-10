@@ -30,6 +30,12 @@ public class Wizard extends Player {
         System.out.println(this.getName() + " unleashes Arcane Blast on all enemies!");
         List<Enemy> enemies = new ArrayList<>(context.getEnemyCombatants());
         for (Enemy enemy : enemies) {
+
+            if (enemy.isNegateDamage()){
+                System.out.println(this.getName() + " tried to blast " + enemy.getName() + ", but failed!");
+                continue;
+            }
+
             int damageDealt = enemy.dealDamage(this);
             System.out.println(this.getName() + " blasts " + enemy.getName() + " for " + damageDealt + " damage!");
             if (!enemy.isAlive()) {
