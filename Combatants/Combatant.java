@@ -86,6 +86,9 @@ public abstract class Combatant {
     }
 
     public void startAction(BattleContext battleContext){
+
+        if (!isAlive()){ return; }
+
         if (isStunned()){
             System.out.println(this.name + " can't move - their action was skipped!");
             return;

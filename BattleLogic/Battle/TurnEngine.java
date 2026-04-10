@@ -49,9 +49,7 @@ public class TurnEngine {
 	}
 	private void runCombatantActions(TurnOrderStrategy turnOrderStrategy){
 		for (Combatant combatant : turnOrderStrategy.getCombatantOrderList()) {
-			if (combatant.isAlive()){
-				combatant.startAction(battleContext); // Run action
-			}
+			combatant.startAction(battleContext); // Run action (Alive check is in startAction)
 		}
 	}
 	private void runEndTurnEffects(TurnOrderStrategy turnOrderStrategy){
