@@ -16,7 +16,7 @@ public class SmokeBomb extends Item {
 		System.out.println(useTarget.getName() + " is now immune to attacks!");
 
 		removeItem();
-	};
+	}
 
 	@Override
 	public Combatant[] getValidTargets(Combatant user, BattleContext context) {

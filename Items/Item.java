@@ -27,7 +27,7 @@ public abstract class Item {
 		}
 
 		useEffect(user, useTarget, context);
-	};
+	}
 
 	/**
 	 * @return Name of the item

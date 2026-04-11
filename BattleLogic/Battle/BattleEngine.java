@@ -110,7 +110,7 @@ public class BattleEngine {
 				BattleEngine battleEngine = new BattleEngine();
 				battleEngine.startBattle(levelSpawnsSupplier, playerItemSupplyList);
 				break;
-			default: return;
+			default:
 		}
 	}
 }

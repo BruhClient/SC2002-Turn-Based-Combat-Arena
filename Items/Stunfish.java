@@ -30,7 +30,7 @@ public class Stunfish extends Item {
 		else {
 			System.out.println("The Stunfish failed to work! It can be used again, however.");
 		}
-	};
+	}
 
 	@Override
 	public Combatant[] getValidTargets(Combatant user, BattleContext context) {

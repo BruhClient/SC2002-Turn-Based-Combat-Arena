@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import static Combatants.Stats.StatList.StatType.SPEED;
 
 public class TurnOrderStrategy {
-	private ArrayList<Combatant> combatantOrderList;
+	private final ArrayList<Combatant> combatantOrderList;
 
 	public TurnOrderStrategy(ArrayList<Combatant> combatants) {
 		this.combatantOrderList = arrangeByTurnOrder(combatants);

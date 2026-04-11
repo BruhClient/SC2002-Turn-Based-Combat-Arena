@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public abstract class LevelSpawns {
 	private final ArrayList<ArrayList<Combatant>> waveList = new ArrayList<>();
-	private String spawnName;
+	private final String spawnName;
 	public LevelSpawns(String spawnName) {
 		this.spawnName = spawnName;
 		SpawnPattern();

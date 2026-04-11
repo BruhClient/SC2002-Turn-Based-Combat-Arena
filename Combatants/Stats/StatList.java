@@ -10,7 +10,7 @@ import static java.lang.Math.clamp;
 
 public class StatList {
 	public enum StatType { HP, ATTACK, DEFENSE, SPEED }
-	private Map<StatType, Stat> statMap = new HashMap<>();
+	private final Map<StatType, Stat> statMap = new HashMap<>();
 
 	public StatList(int hp, int attack, int defense, int speed) {
 		this.statMap.put(StatType.HP, new Stat("❤", hp, hp, 0));

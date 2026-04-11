@@ -61,7 +61,7 @@ public class TextboxPlayerInput {
 		if(optionList.isEmpty()) {
 			System.out.println("There are no options to pick!");
 			return null;
-		};
+		}
 		// If skipSingleOption, immediately returns the only option
 		if(optionList.size() == 1 && skipSingleOption) return optionList.getFirst();
 

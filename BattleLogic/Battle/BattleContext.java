@@ -14,7 +14,7 @@ import java.util.Random;
 public class BattleContext {
 	private int waveNum = 0;
 	private int turnNum = 0;
-	private LevelSpawns levelSpawns;
+	private final LevelSpawns levelSpawns;
 	private ArrayList<Combatant> allCombatants;
 
 	public BattleContext(LevelSpawns levelSpawns, ArrayList<Combatant> initialCombatants){
