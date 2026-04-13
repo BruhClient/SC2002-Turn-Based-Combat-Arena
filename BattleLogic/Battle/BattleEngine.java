@@ -95,7 +95,6 @@ public class BattleEngine {
 		textboxBattleInfo.printBattleInfo(turnOrderStrategy.getCombatantOrderList());
 	}
 	private void afterBattleQuery(){
-		//TODO - ask for replay same settings, replay, or quit
 		System.out.println("Would you like to play again?");
 
 		String[] optionsDesc = {"Replay", "Replay with same settings", "Quit"};
