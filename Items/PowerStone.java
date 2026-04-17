@@ -26,13 +26,13 @@ public class PowerStone extends Item {
 		}
 
 		// Select target. (target selection if only one target)
-		Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), true);
+		Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), false, true);
 		if (target == null) {
 			System.out.println("The Power Stone was not used.");
 			return;
 		}
 
-		// Trigger special skill - cooldown is intentionally NOT changed
+		// Trigger special skill (cooldown is intentionally NOT changed)
 		player.useSpecialSkill(target, context);
 		removeItem();
 	}

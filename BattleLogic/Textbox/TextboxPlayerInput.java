@@ -88,22 +88,23 @@ public class TextboxPlayerInput {
 	 * (Note that getting combatants from battlecontext already filters out dead combatants.)
 	 * @see #askGeneral(String, String[], List, boolean, boolean)
 	 * @param combatantList List of combatants.
+	 * @param allowCancel Allow cancelling of menu
 	 * @see BattleContext#getEnemyCombatants()
 	 * @see BattleContext#getPlayerCombatants()
 	 * @return Selected combatant
 	 */
-	public static <T extends Combatant> T askCombatant(List<T> combatantList, boolean skipSingleOption){
+	public static <T extends Combatant> T askCombatant(List<T> combatantList, boolean allowCancel, boolean skipSingleOption){
 		String[] descList = combatantList.stream()
 				.map(Combatant::getName)
 				.toArray(String[]::new);
-		return askGeneral("Select a target: ", descList, combatantList, true, skipSingleOption);
+		return askGeneral("Select a target: ", descList, combatantList, allowCancel, skipSingleOption);
 	}
-	/// @see #askCombatant(List, boolean)
-	public static <T extends Combatant> T askCombatant(String query, List<T> combatantList, boolean skipSingleOption){
+	/// @see #askCombatant(List, boolean, boolean)
+	public static <T extends Combatant> T askCombatant(String query, List<T> combatantList, boolean allowCancel, boolean skipSingleOption){
 		String[] descList = combatantList.stream()
 				.map(Combatant::getName)
 				.toArray(String[]::new);
-		return askGeneral(query, descList, combatantList, true, skipSingleOption);
+		return askGeneral(query, descList, combatantList, allowCancel, skipSingleOption);
 	}
 
 	/**

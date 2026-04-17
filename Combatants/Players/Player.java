@@ -84,7 +84,7 @@ public abstract class Player extends Combatant {
 
         // Skip the target selection only if the only possible target is this
         boolean skipSelection = Arrays.equals(validTargets, new Combatant[]{this});
-        Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), skipSelection);
+        Combatant target = TextboxPlayerInput.askCombatant(Arrays.stream(validTargets).toList(), true, skipSelection);
         if (target == null) {
             performAction(battleContext);
             return;
