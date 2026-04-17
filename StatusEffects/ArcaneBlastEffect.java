@@ -4,7 +4,7 @@ import Combatants.Stats.StatList;
 
 public class ArcaneBlastEffect extends StatusEffect{
 
-  private int arcaneBlastAmount = 0;
+  private int arcaneBlastAmount = 1;
   static int BLAST_DAMAGE_INCRE = 10;
 
   public ArcaneBlastEffect(){
