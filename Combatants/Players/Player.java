@@ -41,16 +41,8 @@ public abstract class Player extends Combatant {
 
     @Override
     public void startAction(BattleContext battleContext) {
-        for (StatusEffect status : getStatusEffect()) {
-            if (status.statModifier.getDisableAction()) {
-                System.out.println(getName() + " can't move - their action was skipped!");
-                return;
-            }
-        }
-        performAction(battleContext);
-        if (specialCooldown > 0) {
-            specialCooldown--;
-        }
+        if (specialCooldown > 0) { specialCooldown--; }
+        super.startAction(battleContext);
     }
 
     public void performAction(BattleContext battleContext) {

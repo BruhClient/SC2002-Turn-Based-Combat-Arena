@@ -5,7 +5,7 @@ import Combatants.Enemies.*;
 public class Spawns_base2 extends LevelSpawns {
 
 	public Spawns_base2() {
-		super("Normal");
+		super("Medium");
 	}
 
 	@Override

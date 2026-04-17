@@ -60,7 +60,13 @@ public abstract class LevelSpawns {
 //	}
 
 	public void SpawnNextWaveActions(int waveNum, BattleContext battleContext){
-		System.out.println("All enemies have been defeated. Wave " + waveNum + " has started!");
+
+		if(waveNum == 0){
+			System.out.println("Wave " + waveNum + " has started!");
+		} else {
+			System.out.println("All enemies have been defeated. Wave " + waveNum + " has started!");
+		}
+
 		battleContext.addCombatants(getWaveSpawn(waveNum));
 		// this can be overridden by subclasses to do really funny things on wave spawn
 	}
